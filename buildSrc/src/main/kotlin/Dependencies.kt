@@ -17,7 +17,7 @@ import Versions.room
 object Versions {
 
     // Android
-    const val applicationId = "io.mochadwi.github"
+    const val applicationId = "io.mochadwi.social"
     const val androidGradle = "3.5.0-beta02"
     const val androidBuildTools = "28.0.3"
     const val androidCompileSdk = 28
