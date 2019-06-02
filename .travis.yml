@@ -1,6 +1,7 @@
 # Use docker image insted: refer this: https://stackoverflow.com/a/41940240/3763032
 # Fix for license: https://stackoverflow.com/a/42736695/3763032
 language: android
+dist: trusty
 sudo: required
 jdk:
   - oraclejdk8
