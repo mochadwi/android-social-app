@@ -3,15 +3,15 @@ Social app
 [![Build Status](https://api.travis-ci.com/mochadwi/android-jsonplaceholder-app.svg?branch=master)](https://travis-ci.com/mochadwi/android-jsonplaceholder-app) [![codecov](https://codecov.io/gh/mochadwi/android-jsonplaceholder-app/branch/master/graph/badge.svg)](https://codecov.io/gh/mochadwi/android-jsonplaceholder-app)
 
 ### Feature
-- [ ] local-storage dengan Room
-- [ ] menggunakan view-model dan live-data
+- [x] local-storage dengan Room
+- [x] menggunakan view-model dan live-data
 - [ ] Hit API di background process dengan work-manager
-- [ ] Mengimplementasikan kotlin-coroutines
-- [ ] arsitektur berbasis offline-first
-- [ ] format commit dengan git-karma
+- [x] Mengimplementasikan kotlin-coroutines
+- [x] arsitektur berbasis offline-first
+- [x] format commit dengan git-karma
 
 ### Nice to have:
-- [ ] mengimplementasikan navigation component dari jetpack
+- [x] mengimplementasikan navigation component dari jetpack
 - [ ] menggunakan dagger
 
 ### Instruction
@@ -47,7 +47,8 @@ Social app
 - Building Bundle with ease
   - (with kotlin extension: **bundleOf( "key0" bundleTo "val", "key1" bundleTo 100  )**)
 - Unit / Instrumentation test
-  - `./gradlew test` to check for the test
+  - `./gradlew test` to check for the test or
+  - `./gradlew clean build` to build everything including check for the test
   - Use `sharedTest` directory for commonly used utils for both `test` & `androidTest`
 - Better gradle managament (**buildSrc** directory)
   - Kotlin-DSL used
