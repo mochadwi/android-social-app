@@ -9,6 +9,7 @@ import io.mochadwi.data.datasource.webservice.json.category.CategoryResponse
 import io.mochadwi.data.datasource.webservice.json.category.MasterResponse
 import io.mochadwi.domain.category.CategoryModel
 import io.mochadwi.domain.category.MasterModel
+import io.mochadwi.domain.post.PostModel
 import io.mochadwi.domain.user.UserModel
 import io.mochadwi.util.ext.coroutineAsync
 import kotlinx.coroutines.Deferred
@@ -32,6 +33,7 @@ interface AppRepository {
     fun getMenCategoryAsync(): Deferred<List<CategoryModel>?>
     fun getWomenCategoryAsync(): Deferred<List<CategoryModel>?>
     fun getUsersAsync(param: Map<String, String>?): Deferred<List<UserModel>?>
+    fun getPostsAsync(): Deferred<List<PostModel>?>
 }
 
 /**
@@ -140,5 +142,9 @@ class AppRepositoryImpl(
                 UserModel.from(it)
             }
         }
+    }
+
+    override fun getPostsAsync(): Deferred<List<PostModel>?> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -2,10 +2,12 @@ package io.mochadwi.data.datasource.webservice
 
 import io.mochadwi.data.datasource.webservice.json.category.CategoryResponse
 import io.mochadwi.data.datasource.webservice.json.category.MasterResponse
+import io.mochadwi.data.datasource.webservice.json.post.PostResponse
 import io.mochadwi.data.datasource.webservice.json.user.UsersResponse
 import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_ALL
 import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_MASTER
 import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_MEN
+import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_POSTS
 import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_SEARCH_USERS
 import io.mochadwi.util.helper.AppHelper.Const.ENDPOINT_WOMEN
 import kotlinx.coroutines.Deferred
@@ -43,4 +45,7 @@ interface AppWebDatasource {
     fun getUsersAsync(
             @QueryMap param: Map<String, String>
     ): Deferred<UsersResponse>
+
+    @GET(ENDPOINT_POSTS)
+    fun getPostsAsync(): Deferred<List<PostResponse>>
 }

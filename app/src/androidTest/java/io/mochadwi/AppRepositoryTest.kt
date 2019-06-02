@@ -26,17 +26,17 @@ class AppRepositoryTest : KoinTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
-    fun test_getUsersApi() {
+    fun test_getPostsApi() {
         runBlocking {
-            val result = repository.getUsersAsync(null).await()
+            val result = repository.getPostsAsync().await()
             result?.forEach(::println)
         }
     }
 
     @Test
-    fun test_isNotEmptyUsersApi() {
+    fun test_isNotEmptyPostsApi() {
         runBlocking {
-            val result = repository.getUsersAsync(null).await()
+            val result = repository.getPostsAsync().await()
 
             assertEquals(true, result != null)
             assertEquals(true, result?.isNotEmpty().default)

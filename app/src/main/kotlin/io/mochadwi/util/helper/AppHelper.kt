@@ -323,6 +323,7 @@ class AppHelper {
         const val ENDPOINT_ALL = "all.json"
         const val ENDPOINT_MEN = "men.json"
         const val ENDPOINT_WOMEN = "women.json"
+        const val ENDPOINT_POSTS = "posts"
 
     }
 

@@ -3,6 +3,7 @@ package io.mochadwi.data.datasource.webservice.local
 import io.mochadwi.data.datasource.webservice.AppWebDatasource
 import io.mochadwi.data.datasource.webservice.json.category.CategoryResponse
 import io.mochadwi.data.datasource.webservice.json.category.MasterResponse
+import io.mochadwi.data.datasource.webservice.json.post.PostResponse
 import io.mochadwi.data.datasource.webservice.json.user.UsersResponse
 import io.mochadwi.util.ext.coroutineAsync
 import kotlinx.coroutines.Deferred
@@ -39,6 +40,10 @@ class LocalFileDataSource(val jsonReader: JsonReader, val delayed: Boolean) : Ap
     }
 
     override fun getUsersAsync(param: Map<String, String>): Deferred<UsersResponse> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getPostsAsync(): Deferred<List<PostResponse>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
