@@ -43,6 +43,7 @@ android:
     - 'google-gdk-license-.+'
 
 before_install:
+  - which sdkmanager
   - echo $ANDROID_HOME
   - chmod +x ./gradlew
   - touch $HOME/.android/repositories.cfg
