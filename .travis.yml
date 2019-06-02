@@ -44,7 +44,9 @@ android:
 
 before_install:
   - which sdkmanager
+  - echo $ANDROID_SDK
   - echo $ANDROID_HOME
+  - ls -al $ANDROID_HOME
   - chmod +x ./gradlew
   - touch $HOME/.android/repositories.cfg
   - mkdir "$ANDROID_HOME/licenses" || true
