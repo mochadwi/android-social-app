@@ -1,4 +1,5 @@
 Github app
+
 [![Build Status](https://travis-ci.com/mochadwi/android-jsonplaceholder-app.svg?branch=master)](https://travis-ci.com/mochadwi/android-jsonplaceholder-app) [![codecov](https://codecov.io/gh/mochadwi/android-jsonplaceholder-app/branch/master/graph/badge.svg)](https://codecov.io/gh/mochadwi/android-jsonplaceholder-app)
 
 ### Feature

@@ -60,6 +60,7 @@ android {
         getByName("debug") {
             isMinifyEnabled = false
             isDebuggable = true
+            isTestCoverageEnabled = true
         }
     }
 
