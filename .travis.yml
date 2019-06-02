@@ -58,6 +58,7 @@ before_script:
 jobs:
   include:
     - stage: build
+      name: "Clean build"
       script: ./gradlew clean build
 
     - stage: test
@@ -74,6 +75,7 @@ jobs:
       name: "Instrumentation tests"
 
     - stage: assemble
+      name: "Assemble"
       script:
         # upload to fabric crashlyticsUploadDistributionRelease- ./gradlew build jacocoTestReport assembleAndroidTest
         - ./gradlew --no-daemon --parallel --stacktrace clean assembleDevelopmentDebug
