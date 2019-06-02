@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:shrinkMode="strict">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="activity_padding_horizontal">16dp</dimen>
+
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_radius">2dp</dimen>
+
+    <dimen name="icon_width">44dp</dimen>
+    <dimen name="icon_height">44dp</dimen>
+
+    <dimen name="text_caption">13sp</dimen>
+
+    <dimen name="text">14sp</dimen>
+    <dimen name="text_subheading">16sp</dimen>
+    <dimen name="text_heading">18sp</dimen>
+    <dimen name="text_title">19sp</dimen>
+    <dimen name="text_headline">24sp</dimen>
+    <dimen name="text_display1">34sp</dimen>
+
+    <dimen name="cell_height">72dp</dimen>
+
+
+    <!-- Dimens for margin n' padding -->
+    <dimen name="dimens_0dp">0dp</dimen>
+    <dimen name="dimens_1dp">1dp</dimen>
+    <dimen name="dimens_2dp">2dp</dimen>
+    <dimen name="dimens_4dp">4dp</dimen>
+    <dimen name="dimens_6dp">6dp</dimen>
+    <dimen name="dimens_7dp">7dp</dimen>
+    <dimen name="dimens_8dp">8dp</dimen>
+    <dimen name="dimens_10dp">10dp</dimen>
+    <dimen name="dimens_12dp">12dp</dimen>
+    <dimen name="dimens_14dp">14dp</dimen>
+    <dimen name="dimens_16dp">16dp</dimen>
+    <dimen name="dimens_18dp">18dp</dimen>
+    <dimen name="dimens_20dp">20dp</dimen>
+    <dimen name="dimens_22dp">22dp</dimen>
+    <dimen name="dimens_24dp">24dp</dimen>
+    <dimen name="dimens_32dp">32dp</dimen>
+    <dimen name="dimens_36dp">36dp</dimen>
+    <dimen name="dimens_38dp">38dp</dimen>
+    <dimen name="dimens_40dp">40dp</dimen>
+    <dimen name="dimens_44dp">44dp</dimen>
+    <dimen name="dimens_48dp">48dp</dimen>
+    <dimen name="dimens_56dp">56dp</dimen>
+    <dimen name="dimens_62dp">62dp</dimen>
+    <dimen name="dimens_64dp">64dp</dimen>
+    <dimen name="dimens_72dp">72dp</dimen>
+    <dimen name="dimens_80dp">80dp</dimen>
+    <dimen name="dimens_88dp">88dp</dimen>
+    <dimen name="dimens_96dp">96dp</dimen>
+    <dimen name="dimens_104dp">104dp</dimen>
+    <dimen name="dimens_100dp">100dp</dimen>
+    <dimen name="dimens_112dp">112dp</dimen>
+    <dimen name="dimens_120dp">120dp</dimen>
+    <dimen name="dimens_128dp">128dp</dimen>
+    <dimen name="dimens_136dp">136dp</dimen>
+    <dimen name="dimens_144dp">144dp</dimen>
+    <dimen name="dimens_152dp">152dp</dimen>
+    <dimen name="dimens_160dp">160dp</dimen>
+    <dimen name="dimens_168dp">168dp</dimen>
+    <dimen name="dimens_176dp">172dp</dimen>
+    <dimen name="dimens_184dp">184dp</dimen>
+    <dimen name="dimens_192dp">192dp</dimen>
+    <dimen name="dimens_200dp">200dp</dimen>
+    <dimen name="dimens_208dp">208dp</dimen>
+    <dimen name="dimens_216dp">216dp</dimen>
+    <dimen name="dimens_224dp">224dp</dimen>
+    <dimen name="dimens_232dp">232dp</dimen>
+    <dimen name="dimens_240dp">240dp</dimen>
+    <dimen name="dimens_248dp">248dp</dimen>
+    <dimen name="dimens_256dp">256dp</dimen>
+    <dimen name="dimens_264dp">264dp</dimen>
+    <dimen name="dimens_272dp">272dp</dimen>
+    <dimen name="dimens_280dp">280dp</dimen>
+    <dimen name="dimens_288dp">288dp</dimen>
+    <dimen name="dimens_296dp">296dp</dimen>
+    <dimen name="dimens_304dp">304dp</dimen>
+    <dimen name="dimens_312dp">312dp</dimen>
+    <dimen name="dimens_320dp">320dp</dimen>
+
+    <!-- Dimens for text size -->
+    <dimen name="size_6sp">6sp</dimen>
+    <dimen name="size_8sp">8sp</dimen>
+    <dimen name="size_10sp">10sp</dimen>
+    <dimen name="size_12sp">12sp</dimen>
+    <dimen name="size_14sp">14sp</dimen>
+    <dimen name="size_16sp">16sp</dimen>
+    <dimen name="size_18sp">18sp</dimen>
+    <dimen name="size_19sp">19sp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
+    <dimen name="size_22sp">22sp</dimen>
+    <dimen name="size_24sp">24sp</dimen>
+    <dimen name="size_26sp">26sp</dimen>
+    <dimen name="size_28sp">28sp</dimen>
+    <dimen name="size_30sp">30sp</dimen>
+    <dimen name="size_32sp">32sp</dimen>
+    <dimen name="size_34sp">34sp</dimen>
+    <dimen name="size_36sp">36sp</dimen>
+    <dimen name="size_38sp">38sp</dimen>
+    <dimen name="size_40sp">40sp</dimen>
+    <dimen name="size_52sp">52sp</dimen>
+    <dimen name="size_54sp">54sp</dimen>
+    <dimen name="size_96sp">96sp</dimen>
+    <dimen name="size_112sp">112sp</dimen>
+
+    <dimen name="divider_height">32px</dimen>
+</resources>

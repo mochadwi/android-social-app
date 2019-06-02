@@ -1,0 +1,186 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <!-- The launcher theme. It sets the main window background to the launch_screen drawable -->
+    <style name="AppTheme.Launcher" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <style name="LinkButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="colorControlHighlight">@color/accent</item>
+    </style>
+
+    <style name="PrimaryButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="RaisedButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="FlatButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ImageButton">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="Caption" parent="Text">
+        <item name="android:textSize">@dimen/text_caption</item>
+    </style>
+
+    <style name="Text" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textSize">@dimen/text</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="TextSubHeading" parent="Text">
+        <item name="android:textSize">@dimen/text_subheading</item>
+    </style>
+
+    <style name="TextHeading" parent="Text">
+        <item name="android:textSize">@dimen/text_heading</item>
+    </style>
+
+    <style name="TextTitle" parent="Text">
+        <item name="android:fontFamily">@font/quicksand_bold_oblique</item>
+        <item name="android:textSize">@dimen/text_title</item>
+    </style>
+
+    <style name="TextHeadline" parent="TextTitle">
+        <item name="android:textSize">@dimen/text_headline</item>
+    </style>
+
+    <style name="TextDisplay1" parent="TextTitle">
+        <item name="android:textSize">@dimen/text_display1</item>
+    </style>
+
+    <style name="ToolBarTitle" parent="TextTitle"/>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.Italic" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/mainGreen</item>
+        <item name="android:textStyle">italic</item>
+        <!-- your custom attributes -->
+    </style>
+
+    <style name="AppTheme.Italic.White" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/mainWhite</item>
+        <item name="android:textStyle">italic</item>
+        <item name="colorControlNormal">@color/mainWhite</item>
+        <item name="android:textColorHighlight">@color/mainWhite</item>
+        <item name="colorControlActivated">@color/mainWhite</item>
+        <item name="colorControlHighlight">@color/mainWhite</item>
+    </style>
+
+    <style name="AppTheme.Italic.Orange" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHighlight">@color/mainOrange</item>
+        <item name="android:textColor">@color/mainOrange</item>
+        <item name="colorControlNormal">@color/mainOrange</item>
+        <item name="colorControlActivated">@color/mainOrange</item>
+        <item name="colorControlHighlight">@color/mainOrange</item>
+        <!-- your custom attributes -->
+    </style>
+
+    <style name="AppTheme.Hint" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+    </style>
+
+    <style name="cusToolbarNavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <!--default is 56dp-->
+        <item name="android:minWidth">56dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
+    <style name="cusToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <!--default 4dp-->
+        <item name="titleMargin">10dp</item>
+        <!--default @dimen/abc_action_bar_content_inset_with_nav-->
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="contentInsetStart">@dimen/abc_action_bar_content_inset_with_nav</item>
+    </style>
+
+    <style name="AppTheme.CustomToolbar" parent="AppTheme">
+
+        <item name="toolbarNavigationButtonStyle">@style/cusToolbarNavigationButtonStyle</item>
+        <item name="toolbarStyle">@style/cusToolbarStyle</item>
+
+    </style>
+
+    <style
+        name="BaseTextHeadlineV1"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/mainWhite</item>
+        <item name="android:textSize">@dimen/size_54sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style
+        name="BaseTextList"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textDark</item>
+        <item name="android:textSize">@dimen/size_16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingExtra">@dimen/size_19sp</item>
+    </style>
+
+    <style
+        name="BaseTextHighlight"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textLight</item>
+        <item name="android:textSize">@dimen/size_36sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:lineSpacingExtra">@dimen/size_52sp</item>
+    </style>
+
+    <style
+        name="BaseTextHeadlineV2"
+        parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textDark</item>
+        <item name="android:textSize">@dimen/size_96sp</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:lineSpacingExtra">@dimen/size_112sp</item>
+    </style>
+
+</resources>

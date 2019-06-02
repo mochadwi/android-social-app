@@ -1,0 +1,64 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:shrinkMode="strict">
+    <string name="app_folder">App_DIR</string>
+    <string name="message_profile">Profile</string>
+    <string name="message_compose">Compose</string>
+    <string name="transition_name">transition_name</string>
+    <string name="message_send">Kirim pesanmu</string>
+    <string name="message_sendto">Kirim ke?</string>
+    <string name="loading_error">Error while loading -</string>
+    <string name="error_message_general">Error: </string>
+    <string name="search">SEARCH</string>
+    <string name="cancel">CANCEL</string>
+    <string name="retry">Retry</string>
+    <string name="error_backend">Something went wrong at our end!</string>
+
+    <string name="data_is_empty">Data kosong</string>
+    <string name="please_wait">Silakan tunggu</string>
+    <string name="title_main_vote">vote</string>
+    <string name="title_main_description">Deskripsi</string>
+    <string name="message_name">Nama</string>
+    <string name="message_nik">NIK (Nomor KTP)</string>
+    <string name="message_policenumber">Nomor Kendaraan</string>
+    <string name="message_religion">Agama</string>
+    <string name="message_gender">Jenis Kelamin</string>
+    <string name="message_otherdata">Data Lainnya</string>
+    <string name="message_appdomicile">Domisili </string>
+    <string name="message_province">Pilih Provinsi</string>
+    <string name="message_city">Pilih Kota/Kabupaten</string>
+    <string name="message_district">Pilih Kecamatan</string>
+    <string name="message_village">Pilih Kelurahan</string>
+    <string name="message_iagreed">Saya setuju</string>
+    <string name="message_male">Laki-laki</string>
+    <string name="message_female">Perempuan</string>
+    <string name="message_terms">dengan syarat kondisi dan kebijakan privasi</string>
+    <string name="message_handphone">No. Hp</string>
+    <string name="message_email">Email</string>
+    <string name="message_password">Kata Sandi</string>
+    <string name="message_passwordconfirm">Konfirmasi Kata Sandi</string>
+    <string name="message_enter">Masuk</string>
+    <string name="message_forgotpass">Lupa Kata Sandi</string>
+    <string name="message_datacomplete">*Semua data harus dilengkapi</string>
+    <string name="message_passworddiff">*Kata sandi tidak sama</string>
+    <string name="message_success">Sukses</string>
+    <string name="mark_question">\&#63;</string>
+    <string name="mark_carriagereturn">\&#8629;</string>
+    <string name="message_custom">%1$s</string>
+    <string name="message_notregister">Belum memiliki akun</string>
+    <string name="message_register">Daftar</string>
+
+    <!-- API KEY -->
+    <string name="fabric_api_key">261e27dc5baae72193fd64e849234ca4bcf6971d</string>
+    <string name="message_comingsoon">Segera hadir!</string>
+    <string name="message_cameratitle">Izin akses kamera</string>
+    <string name="message_cameramessage">Izin kamera diperlukan untuk mengunggah gambar</string>
+    <string name="message_directorytitle">Izin akses direktori</string>
+    <string name="message_directorymessage">Izin direktori diperlukan untuk menyimpan berkas</string>
+    <string name="message_defaulttitle">Izin akses</string>
+    <string name="message_defaultmessage">Izin diperlukan untuk melanjutkan aktifitasnya</string>
+    <string name="message_logout">Logout</string>
+    <string name="message_ontop">%1$d on top</string>
+    <string name="message_celcius">%1$s C</string>
+    <string name="message_price">$ %1$s</string>
+    <string name="message_celcius_symbol">%1$s°</string>
+    <string name="message_sell">Sell</string>
+</resources>

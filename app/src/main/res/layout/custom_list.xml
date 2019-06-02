@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card="http://schemas.android.com/apk/res-auto"
+        xmlns:list="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <import type="io.mochadwi.R"/>
+
+        <!--
+        TODO: @mochadwi build a generic type variable receiver? https://stackoverflow.com/a/38777594/3763032
+        -->
+        <variable
+            name="vm"
+            type="io.mochadwi.util.base.BaseViewModel"/>
+
+        <variable
+            name="list"
+            type="io.mochadwi.util.mvvm.MutableSetObservableField&lt;io.mochadwi.view.user.list.UserItem>"/>
+
+        <variable
+            name="layoutId"
+            type="Integer"/>
+
+        <variable
+            name="orientation"
+            type="Integer"/>
+
+        <variable
+            name="viewType"
+            type="Integer"/>
+
+        <variable
+            name="isGrid"
+            type="Boolean"/>
+
+        <variable
+            name="spanCount"
+            type="Integer"/>
+
+    </data>
+
+    <merge
+        tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@color/mainWhiteDark"
+            android:paddingTop="@dimen/dimens_16dp"
+            android:visibility="gone"
+            app:cardElevation="@dimen/dimens_16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            card:isError="@{vm.isError}"
+            card:isProgress="@{vm.progress}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGithubList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                list:isGrid="@{isGrid ?? false}"
+                list:items="@{list}"
+                list:layoutId="@{layoutId}"
+                list:orientation="@{orientation ?? 0}"
+                list:spanCount="@{spanCount ?? 0}"
+                list:viewType="@{viewType ?? 1}"
+                tools:listitem="@layout/user_item"
+                />
+
+        </androidx.cardview.widget.CardView>
+    </merge>
+</layout>

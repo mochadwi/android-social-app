@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:image="http://schemas.android.com/apk/res-auto"
+        xmlns:text="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="io.mochadwi.view.user.list.UserItem"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimens_4dp"
+        app:cardCornerRadius="@dimen/dimens_8dp"
+        app:cardElevation="@dimen/dimens_8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/categoryItemLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivProductPhoto"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:contentDescription="Photo Product"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@id/tvProductName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
+                image:glideImage="@{item.avatar_url}"
+                tools:src="@drawable/ic_loading"/>
+
+            <TextView
+                android:id="@+id/tvProductName"
+                style="@style/TextList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_4dp"
+                android:layout_marginTop="@dimen/dimens_4dp"
+                android:layout_marginEnd="@dimen/dimens_4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                text:id="@{item.id}"
+                text:username="@{item.login}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProductPhoto"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:hint="Module A Module A Module A Module A Module A"
+                tools:text="Username: Tuesday"
+                />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                style="@style/TextList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="@id/tvProductName"
+                app:layout_constraintRight_toRightOf="@id/tvProductName"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName"
+                text:score="@{item.score}"
+                tools:text="@string/message_price"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

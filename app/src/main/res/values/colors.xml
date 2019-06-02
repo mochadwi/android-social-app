@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:shrinkMode="strict">
+
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#F00</color>
+    <color name="accent_dark">#ffa000</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#777777</color>
+    <color name="icons_black">#212121</color>
+    <color name="icons">@color/accent_dark</color>
+    <color name="divider">#BDBDBD</color>
+
+    <color name="delete_row_background">#fa315b</color>
+    <color name="grey1">#e4e3e4</color>
+    <color name="grey2">#F5F5F5</color>
+    <color name="grey3">#FAFAFA</color>
+
+    <color name="temp_0">#455a64</color>
+    <color name="temp_1">#42a5f5</color>
+    <color name="temp_2">#26a69a</color>
+    <color name="temp_3">#ffb74d</color>
+    <color name="temp_4">#e57373</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="mainWhite">#FFFFFF</color>
+    <color name="mainWhiteDark">#f5f6f7</color>
+
+    <color name="mainOrange">#FB9A2D</color>
+    <color name="mainGreen">#57c1b0</color>
+    <color name="mainRed">#e85959</color>
+    <color name="mainGreenDark">#2b8a7b</color>
+    <color name="dark">#4a4a4a</color>
+    <color name="textDark">#2a2a2a</color>
+    <color name="textLight">#556799</color>
+
+    <color name="greyBackgroundDefault">#424242</color>
+
+    <color name="blueSky">#BBDEFB</color>
+
+    <color name="yellowTags">#FECE7A</color>
+</resources>
