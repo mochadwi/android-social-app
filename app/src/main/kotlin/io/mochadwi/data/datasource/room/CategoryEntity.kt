@@ -9,7 +9,7 @@ import io.mochadwi.domain.category.CategoryModel
  *
  * In syaa Allah created & modified
  * by mochadwi on 10/05/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

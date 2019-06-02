@@ -32,7 +32,7 @@ import retrofit2.HttpException
  *
  * In syaa Allah created & modified
  * by mochadwi on 10/05/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextListener {
@@ -207,7 +207,7 @@ class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         viewModel.apply {
             if (isFirst && !isLocal) {
                 // TODO: @mochadwi implement this on ListBinding.kt instead? or using PagingLibrary?
-                list.rvGithubList.apply {
+                list.rvSocialList.apply {
                     onLoadMore = object : EndlessRecyclerOnScrollListener(layoutManager as GridLayoutManager) {
                         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                             isRefreshing.set(true)

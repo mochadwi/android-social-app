@@ -7,13 +7,13 @@ import kotlinx.android.parcel.Parcelize
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 13/05/19 for github-app
+ * On 13/05/19 for social-app
  */
 
 @Parcelize
 data class MasterModel(
         val name: String = "", // Women
-        val `data`: String = "" // https://api.github.com/Android/json/women.json
+        val `data`: String = "" // https://api.social.com/Android/json/women.json
 ) : Parcelable {
     companion object {
         fun from(response: MasterResponse) = with(response) {

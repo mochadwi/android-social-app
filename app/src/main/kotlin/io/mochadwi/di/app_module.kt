@@ -24,7 +24,7 @@ val rxModule = module {
 
 val viewModelModule = module {
 
-    // ViewModel for Github app
+    // ViewModel for Social app
     viewModel { UserViewModel(get(), get()) }
 }
 
@@ -53,5 +53,5 @@ val repoModule = module {
 }
 
 // Gather all app modules
-val onlineGithubApp = listOf(rxModule, remoteDatasourceModule, roomModule, repoModule, viewModelModule)
-val offlineGithubApp = listOf(rxModule, localAndroidDatasourceModule, roomModule, repoModule, viewModelModule)
+val onlineSocialApp = listOf(rxModule, remoteDatasourceModule, roomModule, repoModule, viewModelModule)
+val offlineSocialApp = listOf(rxModule, localAndroidDatasourceModule, roomModule, repoModule, viewModelModule)

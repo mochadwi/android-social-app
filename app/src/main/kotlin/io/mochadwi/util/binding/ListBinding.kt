@@ -14,7 +14,7 @@ import io.mochadwi.view.user.list.UserViewHolder
  *
  * In syaa Allah created & modified
  * by mochadwi on 16/05/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

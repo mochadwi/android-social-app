@@ -40,7 +40,7 @@ import java.security.MessageDigest
 fun View.showSnackbarWithCustomColor(view: android.view.View, message: String,
                                      textColor: Int, backgroundColor: Int,
                                      duration: Int) {
-    val finalGithub = if (TextUtils.isEmpty(message)) {
+    val finalSocial = if (TextUtils.isEmpty(message)) {
         AppHelper.Const.SERVER_ERROR_MESSAGE_DEFAULT
     } else {
         message
@@ -64,14 +64,14 @@ fun View.showSnackbarWithCustomColor(view: android.view.View, message: String,
         backgroundColor
     }
 
-    val snackView = Snackbar.make(view, finalGithub, finalDuration)
+    val snackView = Snackbar.make(view, finalSocial, finalDuration)
     snackView.setActionTextColor(finalTextColor)
     snackView.view.setBackgroundColor(finalBackgroundColor)
     snackView.show()
 }
 
 fun View.showSnackbarDefault(view: android.view.View, message: String, duration: Int = Snackbar.LENGTH_LONG) {
-    val finalGithub = if (TextUtils.isEmpty(message)) {
+    val finalSocial = if (TextUtils.isEmpty(message)) {
         AppHelper.Const.SERVER_ERROR_MESSAGE_DEFAULT
     } else {
         message
@@ -83,15 +83,15 @@ fun View.showSnackbarDefault(view: android.view.View, message: String, duration:
         duration
     }
 
-    Snackbar.make(view, finalGithub, finalDuration).show()
+    Snackbar.make(view, finalSocial, finalDuration).show()
 }
 
 fun View.setCustomFont(view: android.view.View, fontName: String): Typeface = Typeface
         .createFromAsset(view.context.assets, "fonts/$fontName")
 
 fun View.setupSnackbar(lifecycleOwner: LifecycleOwner,
-                       snackbarGithubLiveEvent: SingleLiveEvent<String>, timeLength: Int) {
-    snackbarGithubLiveEvent.observe(lifecycleOwner, Observer {
+                       snackbarSocialLiveEvent: SingleLiveEvent<String>, timeLength: Int) {
+    snackbarSocialLiveEvent.observe(lifecycleOwner, Observer {
         it?.let { showSnackbarDefault(this, it, timeLength) }
     })
 }

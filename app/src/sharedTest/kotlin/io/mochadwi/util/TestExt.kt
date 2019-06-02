@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 13/05/19 for github-app
+ * On 13/05/19 for social-app
  */
 
 fun <T> LiveData<T>.blockingObserve(block: (Observer<T>) -> Unit): T? {

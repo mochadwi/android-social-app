@@ -63,7 +63,7 @@ val testRxModule = module {
     single { TestSchedulerProvider() as SchedulerProvider }
 }
 
-val testOnlineGithubApp = testAndroidModule + testRemoteDatasourceModule + testRoomModule +
+val testOnlineSocialApp = testAndroidModule + testRemoteDatasourceModule + testRoomModule +
         testRxModule + repoModule + viewModelModule
-val testOfflineGithubApp = testAndroidModule + testLocalJavaDatasourceModule + testRoomModule +
+val testOfflineSocialApp = testAndroidModule + testLocalJavaDatasourceModule + testRoomModule +
         testRxModule + repoModule + viewModelModule

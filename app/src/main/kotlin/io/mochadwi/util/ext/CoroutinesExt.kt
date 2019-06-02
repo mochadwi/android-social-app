@@ -11,7 +11,7 @@ import kotlin.coroutines.suspendCoroutine
  *
  * In syaa Allah created & modified
  * by mochadwi on 05/05/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

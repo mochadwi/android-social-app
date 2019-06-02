@@ -18,7 +18,7 @@ import kotlin.math.ceil
  *
  * In syaa Allah created & modified
  * by mochadwi on 13/01/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

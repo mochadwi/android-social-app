@@ -3,7 +3,7 @@ package io.mochadwi.util.mvvm
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 2019-05-21 for github-app
+ * On 2019-05-21 for social-app
  */
 
 /**

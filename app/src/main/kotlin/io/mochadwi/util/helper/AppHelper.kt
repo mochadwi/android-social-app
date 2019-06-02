@@ -48,7 +48,7 @@ class AppHelper {
         fun decryptionText(encryptionText: String) = StringEncryptionTools().decryptText(encryptionText)
 
         fun saveBitmapToLocalFile(context: Context, imageBitmap: Bitmap, directoryName: String?,
-                                  showGithubStatus: Boolean) {
+                                  showSocialStatus: Boolean) {
             val root = Environment.getExternalStorageDirectory().toString()
 
             val directoryNameDefault = if (TextUtils.isEmpty(directoryName)) {
@@ -93,7 +93,7 @@ class AppHelper {
                 Const.MESSAGE_FAILED_IMAGE_SAVE
             }
 
-            if (showGithubStatus) showToast(context, message)
+            if (showSocialStatus) showToast(context, message)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 val scanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)

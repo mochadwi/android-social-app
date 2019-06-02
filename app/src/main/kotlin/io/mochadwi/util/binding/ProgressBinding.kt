@@ -13,7 +13,7 @@ import io.mochadwi.util.ext.*
  *
  * In syaa Allah created & modified
  * by mochadwi on 01/03/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

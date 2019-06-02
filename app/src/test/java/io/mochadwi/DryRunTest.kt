@@ -1,7 +1,7 @@
 package io.mochadwi
 
-import io.mochadwi.di.testOfflineGithubApp
-import io.mochadwi.di.testOnlineGithubApp
+import io.mochadwi.di.testOfflineSocialApp
+import io.mochadwi.di.testOnlineSocialApp
 import org.junit.After
 import org.junit.Test
 import org.koin.core.context.startKoin
@@ -24,14 +24,14 @@ class DryRunTest : KoinTest {
     @Test
     fun `test LocalConfiguration`() {
         startKoin {
-            modules(testOfflineGithubApp)
+            modules(testOfflineSocialApp)
         }.checkModules()
     }
 
     @Test
     fun `test RemoteConfiguration`() {
         startKoin {
-            modules(testOnlineGithubApp)
+            modules(testOnlineSocialApp)
         }.checkModules()
     }
 }

@@ -64,7 +64,7 @@
             card:isProgress="@{vm.progress}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvGithubList"
+                android:id="@+id/rvSocialList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 list:isGrid="@{isGrid ?? false}"

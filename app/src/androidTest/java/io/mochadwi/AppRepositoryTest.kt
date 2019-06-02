@@ -15,7 +15,7 @@ import org.koin.test.inject
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 2019-05-20 for github-app
+ * On 2019-05-20 for social-app
  */
 
 @RunWith(AndroidJUnit4::class)

@@ -95,8 +95,8 @@ android {
             signingConfig = signingConfigs.getByName("released")
 
             // Env production server
-            buildConfigField("String", "BASE_URL", "\"https://beta.app.com/api/v1/\"")
-            buildConfigField("String", "BASE_IMAGE_URL", "\"https://beta.app.com/api/v1/\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
+            buildConfigField("String", "BASE_IMAGE_URL", "\"https://paper.dropboxstatic.com/static/img/\"")
             buildConfigField("String", "DEFAULT_IMAGE_URL", "\"https://paper.dropboxstatic.com/static/img/favicon/apple-touch-icon.png\"")
 
             // Inject app name for release
@@ -108,12 +108,12 @@ android {
             applicationIdSuffix = ".development"
 
             // Env development server
-            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
             buildConfigField("String", "BASE_IMAGE_URL", "\"https://paper.dropboxstatic.com/static/img/\"")
             buildConfigField("String", "DEFAULT_IMAGE_URL", "\"https://paper.dropboxstatic.com/static/img/favicon/apple-touch-icon.png\"")
 
             // Inject app name for development
-            resValue("string", "app_name", "Github App")
+            resValue("string", "app_name", "Social App")
         }
     }
 }

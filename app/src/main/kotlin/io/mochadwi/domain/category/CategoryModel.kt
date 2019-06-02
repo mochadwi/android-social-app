@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 13/05/19 for github-app
+ * On 13/05/19 for social-app
  */
 
 @Parcelize

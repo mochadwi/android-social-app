@@ -7,7 +7,7 @@ import android.app.AlertDialog
  *
  * In syaa Allah created & modified
  * by mochadwi on 28/05/19
- * dedicated to build github-app
+ * dedicated to build social-app
  *
  */
 

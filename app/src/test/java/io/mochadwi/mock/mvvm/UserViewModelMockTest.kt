@@ -3,7 +3,7 @@ package io.mochadwi.mock.mvvm
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import io.mochadwi.data.repository.AppRepository
-import io.mochadwi.di.testOnlineGithubApp
+import io.mochadwi.di.testOnlineSocialApp
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.domain.State
@@ -57,7 +57,7 @@ class UserViewModelMockTest : KoinTest {
     @Before
     fun before() {
         MockitoAnnotations.initMocks(this)
-        startKoin { modules(testOnlineGithubApp) }
+        startKoin { modules(testOnlineSocialApp) }
         viewModel.states.observeForever(statesView)
     }
 

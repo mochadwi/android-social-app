@@ -5,7 +5,7 @@ import io.mochadwi.view.user.list.UserItem
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 12/05/19 for github-app
+ * On 12/05/19 for social-app
  */
 
 val Boolean?.default: Boolean

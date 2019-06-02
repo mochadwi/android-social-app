@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
 
 /**
- * Read json files and render github date
+ * Read json files and render social date
  */
 class LocalFileDataSource(val jsonReader: JsonReader, val delayed: Boolean) : AppWebDatasource {
 

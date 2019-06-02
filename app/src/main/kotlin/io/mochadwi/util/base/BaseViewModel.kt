@@ -7,7 +7,7 @@ import io.mochadwi.util.rx.SchedulerProvider
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 2019-05-20 for github-app
+ * On 2019-05-20 for social-app
  */
 
 open class BaseViewModel(
