@@ -34,10 +34,11 @@ android {
 
     signingConfigs {
         create("released") {
-            storeFile = file("$rootDir/generalkey.jks")
-            storePassword = System.getenv("APP") // TODO: set $APP="yourpassword" on your machine terminal / environment
-            keyAlias = System.getenv("APP")
-            keyPassword = System.getenv("APP")
+            storeFile = file("$rootDir/placeholder.jks")
+            // TODO: set $APP="yourpassword" on your machine terminal / environment
+            storePassword = System.getenv("PLACEHOLDER_PASS")
+            keyAlias = System.getenv("PLACEHOLDER_PASS")
+            keyPassword = System.getenv("PLACEHOLDER_PASS")
         }
     }
 
