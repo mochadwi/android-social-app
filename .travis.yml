@@ -3,7 +3,7 @@
 language: android
 sudo: required
 jdk:
-  - openjdk8
+  - oraclejdk8
 
 env:
   global:
