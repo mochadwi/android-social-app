@@ -16,15 +16,19 @@ env:
   global:
     - PLACEHOLDER_PASS="placeholder"
     - CODECOV_TOKEN="9989b72c-b770-491a-b9cd-46810bbc47d4"
+    - ANDROID_ABI=armeabi-v7a
+    - ANDROID_TAG=google_apis
+    - ANDROID_TARGET_SDK=28
 
 android:
   components:
     - tools
     - platform-tools
+    - tools
     - extra-android-m2repository
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-28
+    - sys-img-armeabi-v7a-google_apis-28
   licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
@@ -68,7 +72,7 @@ jobs:
     - stage: ui_test
       script:
         - ./gradlew mergedJacocoReport assembleAndroidTest
-        - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a -c 100M
+        - echo no | android create avd --force -n test -t "android-28" --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M
         - emulator -avd test -no-skin -no-audio -no-window &
         - android-wait-for-emulator
         - adb shell input keyevent 82 &
