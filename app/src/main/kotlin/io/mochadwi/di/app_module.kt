@@ -43,14 +43,13 @@ val roomModule = module {
     }
 
     // Expose Dao directly
-    single { get<AppDatabase>().categoryDao() }
     single { get<AppDatabase>().userDao() }
     single { get<AppDatabase>().postDao() }
 }
 
 val repoModule = module {
     // App Data Repository
-    single { AppRepositoryImpl(get(), get(), get(), get()) as AppRepository }
+    single { AppRepositoryImpl(get(), get(), get()) as AppRepository }
 }
 
 // Gather all app modules

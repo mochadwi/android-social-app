@@ -1,12 +1,10 @@
 package io.mochadwi.data.datasource.webservice.local
 
-import io.mochadwi.data.datasource.webservice.json.category.CategoryResponse
-import io.mochadwi.data.datasource.webservice.json.category.MasterResponse
+import io.mochadwi.data.datasource.webservice.json.post.PostResponse
 
 /**
  * Json reader
  */
 interface JsonReader {
-    fun getMasterCategory(name: String): List<MasterResponse>
-    fun getCategoryByName(name: String): List<CategoryResponse>
+    fun getPosts(name: String): List<PostResponse>
 }

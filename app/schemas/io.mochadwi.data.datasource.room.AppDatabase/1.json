@@ -2,70 +2,8 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "be71100ff69641e9df805a2e23d49192",
+    "identityHash": "a0a0b689f7e55104c9768220287c9d91",
     "entities": [
-      {
-        "tableName": "tbl_category",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `status` TEXT NOT NULL, `num_likes` INTEGER NOT NULL, `num_comments` INTEGER NOT NULL, `price` INTEGER NOT NULL, `photo` TEXT NOT NULL, `type` TEXT NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "status",
-            "columnName": "status",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "num_likes",
-            "columnName": "num_likes",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "num_comments",
-            "columnName": "num_comments",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "price",
-            "columnName": "price",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "photo",
-            "columnName": "photo",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "type",
-            "columnName": "type",
-            "affinity": "TEXT",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
       {
         "tableName": "tbl_user",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `login` TEXT NOT NULL, `node_id` TEXT NOT NULL, `avatar_url` TEXT NOT NULL, `gravatar_id` TEXT NOT NULL, `url` TEXT NOT NULL, `html_url` TEXT NOT NULL, `followers_url` TEXT NOT NULL, `following_url` TEXT NOT NULL, `gists_url` TEXT NOT NULL, `starred_url` TEXT NOT NULL, `subscriptions_url` TEXT NOT NULL, `organizations_url` TEXT NOT NULL, `repos_url` TEXT NOT NULL, `events_url` TEXT NOT NULL, `received_events_url` TEXT NOT NULL, `type` TEXT NOT NULL, `site_admin` INTEGER NOT NULL, `score` REAL NOT NULL, PRIMARY KEY(`id`))",
@@ -236,7 +174,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"be71100ff69641e9df805a2e23d49192\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a0a0b689f7e55104c9768220287c9d91\")"
     ]
   }
 }
