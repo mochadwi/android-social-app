@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:image="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
     >
 
     <data>
@@ -19,16 +17,14 @@
         android:layout_height="match_parent"
         android:background="@color/mainWhiteDark">
 
-        <ImageView
-            android:id="@+id/ivProductPhoto"
+        <TextView
+            android:id="@+id/tvPostBody"
             android:layout_width="@dimen/dimens_0dp"
             android:layout_height="@dimen/dimens_200dp"
-            android:scaleType="centerCrop"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            image:glideImage="@{item.avatar_url ?? `image_url`}"
-            tools:src="@mipmap/ic_launcher"/>
+            android:text="@{item.body ?? `body_content`}"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,11 +32,11 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:padding="@dimen/dimens_16dp"
-            android:text="@{item.login ?? `Product Name`}"
+            android:text="@{item.title ?? `Product Name`}"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivProductPhoto"/>
+            app:layout_constraintTop_toBottomOf="@id/tvPostBody"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

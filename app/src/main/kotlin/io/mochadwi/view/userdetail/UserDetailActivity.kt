@@ -27,7 +27,7 @@ class UserDetailActivity : BaseActivity() {
         val item = intent?.getParcelableExtra("product_detail") ?: PostItem()
 
         viewBinding.apply {
-            setupToolbar(toolbar.tbCustom, isDetailActivity = true, newTitle = item.login)
+            setupToolbar(toolbar.tbCustom, isDetailActivity = true, newTitle = item.title)
             replaceFragmentInActivity(
                     UserDetailFragment.newInstance(item),
                     R.id.frameContainer)
