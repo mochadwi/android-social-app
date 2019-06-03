@@ -9,12 +9,9 @@ import io.mochadwi.domain.LoadingState
 import io.mochadwi.domain.State
 import io.mochadwi.util.MockitoHelper.argumentCaptor
 import io.mochadwi.util.TestSchedulerProvider
-import io.mochadwi.util.mock.MockedData.mockUserQuery
-import io.mochadwi.util.mock.MockedData.mockUsername
-import io.mochadwi.util.mock.MockedData.mockUsersModel
+import io.mochadwi.util.mock.MockedData.mockPostsModel
 import io.mochadwi.util.toDeferred
 import io.mochadwi.view.post.PostViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -37,7 +34,6 @@ import org.mockito.MockitoAnnotations
  * dedicated to build weather-app
  *
  */
-@ExperimentalCoroutinesApi
 class PostViewModelMockTest : KoinTest {
 
     @Mock
@@ -68,11 +64,11 @@ class PostViewModelMockTest : KoinTest {
     }
 
     @Test
-    fun `test PostViewModel getUserByKeyword Succeed`() = runBlockingTest {
+    fun `test PostViewModel getPosts Succeed`() = runBlockingTest {
         val page = 1
-        given(repository.getUsersAsync(mockUserQuery)).willReturn(mockUsersModel.toDeferred())
+        given(repository.getPostsAsync()).willReturn(mockPostsModel.toDeferred())
 
-        viewModel.getUserByKeyword(mockUsername, page)
+        viewModel.getPosts()
 
         // setup ArgumentCaptor
         val arg = argumentCaptor<State>()
@@ -83,15 +79,15 @@ class PostViewModelMockTest : KoinTest {
         // Test obtained values in order
         assertEquals(2, values.size)
         assertEquals(LoadingState, values[0])
-        assertEquals(PostViewModel.UserListState.from(page == 1, false, mockUsersModel), values[1])
+        assertEquals(PostViewModel.PostListState.from(mockPostsModel), values[1])
     }
 
     @Test
-    fun `test PostViewModel getUserByKeyword Failed`() = runBlockingTest {
+    fun `test PostViewModel getPosts Failed`() = runBlockingTest {
         val error = Throwable("got an error")
-        given(repository.getUsersAsync(mockUserQuery)).will { throw error }
+        given(repository.getPostsAsync()).will { throw error }
 
-        viewModel.getUserByKeyword(mockUsername, 1)
+        viewModel.getPosts()
 
         // setup ArgumentCaptor
         val arg = argumentCaptor<State>()

@@ -17,7 +17,6 @@ import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.util.base.BaseApiModel
 import io.mochadwi.util.base.BaseUserActionListener
-import io.mochadwi.util.ext.default
 import io.mochadwi.util.ext.fromJson
 import io.mochadwi.util.ext.putArgs
 import io.mochadwi.util.list.EndlessRecyclerOnScrollListener
@@ -96,7 +95,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                             viewModel.apply {
                                 // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
                                 userListSet.clear()
-                                getUserByKeyword(keywords.get().default)
+                                getPosts()
                             }
                             return true
                         }
@@ -127,7 +126,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
 
     private fun setupData() = with(viewBinding) {
         viewModel.apply {
-            getUserByKeyword(keywords.get().default)
+            getPosts()
         }
     }
 
@@ -137,9 +136,8 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
             state?.let {
                 when (state) {
                     is LoadingState -> showIsLoading()
-                    is PostViewModel.UserListState -> {
-                        showCategoryItemList(state.isFirst, state.list.map { PostItem.from(it) })
-                        setupEndlessScroll(state.isFirst, state.isLocal)
+                    is PostViewModel.PostListState -> {
+                        showCategoryItemList(posts = state.list.map { PostItem.from(it) })
                     }
                     is ErrorState -> showError(state.error)
                     else -> {
@@ -154,7 +152,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         viewModel.apply {
             isRefreshing.set(true)
             if (::onLoadMore.isInitialized) onLoadMore.resetState()
-            getUserByKeyword(keywords.get().default)
+            getPosts()
         }
     }
 
@@ -188,12 +186,12 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
 
             error.btnRetry.setOnClickListener {
                 if (::onLoadMore.isInitialized) onLoadMore.resetState()
-                getUserByKeyword(keywords.get().default)
+                getPosts()
             }
         }
     }
 
-    private fun showCategoryItemList(isFirst: Boolean, posts: List<PostItem>) = with(viewBinding) {
+    private fun showCategoryItemList(isFirst: Boolean = true, posts: List<PostItem>) = with(viewBinding) {
         viewModel.apply {
             if (isFirst) userListSet.clear()
             userListSet.addAll(posts.toMutableList())
@@ -211,7 +209,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                     onLoadMore = object : EndlessRecyclerOnScrollListener(layoutManager as GridLayoutManager) {
                         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                             isRefreshing.set(true)
-                            getUserByKeyword(keywords.get().default, page)
+                            getPosts()
                         }
                     }
 

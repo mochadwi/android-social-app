@@ -2,14 +2,12 @@ package io.mochadwi.view.post
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
-import io.mochadwi.data.datasource.webservice.param.QueryParam
 import io.mochadwi.data.repository.AppRepository
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.domain.State
-import io.mochadwi.domain.user.UserModel
+import io.mochadwi.domain.post.PostModel
 import io.mochadwi.util.base.BaseViewModel
-import io.mochadwi.util.ext.toQueryMap
 import io.mochadwi.util.ext.toSingleEvent
 import io.mochadwi.util.mvvm.LiveEvent
 import io.mochadwi.util.mvvm.MutableSetObservableField
@@ -40,40 +38,30 @@ class PostViewModel(
     val states: LiveData<State>
         get() = _states.toSingleEvent()
 
-    fun getUserByKeyword(keyword: String, page: Int = 1) {
-        if (page == 1) _states.value = LoadingState
+    fun getPosts() {
+        _states.value = LoadingState
 
         launch {
             try {
-                val users = appRepository.getUsersAsync(
-                        if (keyword.isNotBlank()) QueryParam(q = keyword, page = page).toQueryMap()
-                        else null
-                ).await()
+                val posts = appRepository.getPostsAsync().await()
 
-                val isLocal = keyword.isBlank()
-
-                _states.value = UserListState.from(
-                        page == 1,
-                        isLocal,
-                        users!!.sortedBy { it.login })
+                _states.value = PostListState.from(posts!!)
             } catch (error: Throwable) {
                 _states.value = ErrorState(error)
             }
         }
     }
 
-    data class UserListState(
-            val isFirst: Boolean,
-            val isLocal: Boolean,
-            val list: List<UserModel>
+    data class PostListState(
+            val list: List<PostModel>
     ) : State() {
         companion object {
-            fun from(isFirst: Boolean, isLocal: Boolean, list: List<UserModel>): UserListState {
+            fun from(list: List<PostModel>): PostListState {
                 return with(list) {
                     when {
                         // TODO: @mochadwi Move this into strings instead
-                        isEmpty() && isFirst -> error("There's an empty user instead, please check your keyword")
-                        else -> UserListState(isFirst = isFirst, isLocal = isLocal, list = this)
+                        isEmpty() -> error("There's an empty user instead, please check your keyword")
+                        else -> PostListState(this)
                     }
                 }
             }
