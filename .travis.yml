@@ -82,10 +82,9 @@ jobs:
 
     - stage: deploy
       name: "Deploy"
-        #      script:
         # todo upload to fabric `crashlyticsUploadDistributionDevelopment` or playstore publishDevelopment
         # e.g: ./gradlew --no-daemon --parallel --stacktrace clean assembleDevelopmentDebug
-        - ./gradlew task
+        script: ./gradlew task
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
