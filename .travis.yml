@@ -2,9 +2,9 @@ after_success:
   - "bash <(curl -s https://codecov.io/bash)"
 android:
   components:
-    - tools
-    - platform-tools
-    - tools # this is necessary fix: https://stackoverflow.com/a/28751112/3763032
+    #    - tools
+    #    - platform-tools
+    #    - tools # this is necessary fix: https://stackoverflow.com/a/28751112/3763032
     - extra-android-m2repository
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
@@ -46,7 +46,7 @@ env:
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
     - ANDROID_TARGET_SDK=28
-    - ADB_INSTALL_TIMEOUT=8
+    - ADB_INSTALL_TIMEOUT=5
 
 # Only clone the most recent commit.
 git:
