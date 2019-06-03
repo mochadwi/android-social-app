@@ -57,7 +57,9 @@ class AppRepositoryImpl(
         }
     }
 
-    override fun searchPostsAsync(query: String): Deferred<List<PostModel>?> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun searchPostsAsync(query: String): Deferred<List<PostModel>?> = coroutineAsync(IO) {
+        postDao.searchPosts(query).map {
+            PostModel.from(it)
+        }
     }
 }
