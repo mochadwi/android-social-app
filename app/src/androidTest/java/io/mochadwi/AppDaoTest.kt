@@ -2,8 +2,8 @@ package io.mochadwi
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.mochadwi.data.datasource.room.UserDao
-import io.mochadwi.util.mock.MockedData.mockUsersEntity
+import io.mochadwi.data.datasource.room.PostDao
+import io.mochadwi.util.mock.MockedData.mockPostsEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -32,31 +32,31 @@ class AppDaoTest : KoinTest {
     /*
      * Inject needed components from Koin
      */
-    private val userDao: UserDao by inject()
+    private val postDao: PostDao by inject()
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun before() {
-        userDao.delete(mockUsersEntity)
+        postDao.delete(mockPostsEntity)
     }
 
     @Test
-    fun test_insertUserDao() = runBlocking {
-        val result = userDao.insert(mockUsersEntity)
+    fun test_insertPostDao() = runBlocking {
+        val result = postDao.insert(mockPostsEntity)
         result.forEach(::println)
 
-        val users = userDao.getAllUsers()
+        val posts = postDao.getAllPosts()
 
         assertEquals(true, result.isNotEmpty())
-        assertEquals(mockUsersEntity.count(), users.count())
-        assertEquals(mockUsersEntity[0].id, users[0].id)
+        assertEquals(mockPostsEntity.count(), posts.count())
+        assertEquals(mockPostsEntity[0].id, posts[0].id)
     }
 
     @Test
-    fun test_getAllUsersDao() = runBlocking {
-        val result = userDao.getAllUsers()
+    fun test_getAllPostsDao() = runBlocking {
+        val result = postDao.getAllPosts()
         result.forEach(::println)
 
         assertEquals(true, result.isNotEmpty())
