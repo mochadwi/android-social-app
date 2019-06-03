@@ -195,4 +195,5 @@ object TestDependencies {
     const val koinTest = "org.koin:koin-test:${Versions.koin}"
     const val testOrchestrator = "androidx.test:orchestrator:${Versions.test}"
     const val multidexInstrument = "androidx.multidex:multidex-instrumentation:${Versions.multiDex}"
+    const val jacocoReport = "com.dicedmelon.gradle:jacoco-android:0.1.4"
 }

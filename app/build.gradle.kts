@@ -6,6 +6,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("kotlinx-serialization") version "1.3.30"
+    id("mergedJacocoReport")
 }
 
 android {
@@ -55,6 +56,7 @@ android {
             isRenderscriptDebuggable = false
             isPseudoLocalesEnabled = false
             isZipAlignEnabled = true
+            isTestCoverageEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
