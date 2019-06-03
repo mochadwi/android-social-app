@@ -54,15 +54,17 @@ class PostViewModel(
     }
 
     fun searchPosts(query: String) {
-        _states.value = LoadingState
+        if (query.isNotBlank()) {
+            _states.value = LoadingState
 
-        launch {
-            try {
-                val posts = appRepository.searchPostsAsync(query).await()
+            launch {
+                try {
+                    val posts = appRepository.searchPostsAsync(query).await()
 
-                _states.value = PostListState.from(query.isNotBlank(), posts!!)
-            } catch (error: Throwable) {
-                _states.value = ErrorState(error)
+                    _states.value = PostListState.from(query.isNotBlank(), posts!!)
+                } catch (error: Throwable) {
+                    _states.value = ErrorState(error)
+                }
             }
         }
     }
