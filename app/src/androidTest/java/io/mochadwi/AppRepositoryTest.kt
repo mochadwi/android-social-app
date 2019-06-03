@@ -34,6 +34,14 @@ class AppRepositoryTest : KoinTest {
     }
 
     @Test
+    fun test_searchPostsApi() {
+        runBlocking {
+            val result = repository.searchPostsAsync("foo").await()
+            result?.forEach(::println)
+        }
+    }
+
+    @Test
     fun test_isNotEmptyPostsApi() {
         runBlocking {
             val result = repository.getPostsAsync().await()

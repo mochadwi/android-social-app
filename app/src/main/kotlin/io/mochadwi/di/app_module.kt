@@ -49,7 +49,7 @@ val roomModule = module {
 
 val repoModule = module {
     // App Data Repository
-    single { AppRepositoryImpl(get(), get(), get()) as AppRepository }
+    single { AppRepositoryImpl(get(), get()) as AppRepository }
 }
 
 // Gather all app modules
