@@ -18,7 +18,7 @@ abstract class PostDao : BaseDao<PostEntity> {
 
     @Query("""
         SELECT tbl_post.* FROM tbl_post_fts
-        JOIN tbl_post ON tbl_post_fts.rowId = id
+        JOIN tbl_post ON tbl_post_fts.docId = id
         WHERE tbl_post_fts MATCH :query
     """)
     abstract suspend fun searchPosts(query: String): List<PostEntity>
