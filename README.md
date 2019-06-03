@@ -12,14 +12,18 @@ Social app
 
 ### Nice to have:
 - [x] mengimplementasikan navigation component dari jetpack
-- [ ] menggunakan dagger
+- [x] menggunakan ~~dagger~~ koin
 
 ### Instruction
-- [ ] Buat sebuah aplikasi untuk menampilkan list of post
+- [x] Buat sebuah aplikasi untuk menampilkan list of post
 - [ ] Dan membuat post baru yang bersumber dari API: https://jsonplaceholder.typicode.com/.
-- [ ] Aplikasi harus mengacu pada paradigma offline-first
+- [x] Aplikasi harus mengacu pada paradigma offline-first
 
 ### Tech Stack
+- Git
+  - Git karma convention used for [git commit message](https://plugins.jetbrains.com/plugin/9861-git-commit-template)
+- CI / CD
+  - Using [Travis](https://github.com/mochadwi/android-social-app/blob/master/.travis.yml)
 - Kotlin
   - with idiom style: Extension
   - Refactor (!!) marks with safety-call (?)
@@ -32,12 +36,14 @@ Social app
   - Couroutine adapter for retrofit to use Deferred return type
   - Combined with room to have a suspend function (this only available on latest room 2.1.0-beta01)
   - Mostly used for Retrofit and Room
+  - Channel used for search query (send & consumeEach)
 - Data Binding
   - I'm trying to implement atomic design (<include> tag) combined with Data binding powerful features e.g: (custom_error.xml, custom_loading.xml)
   - I also creating a custom Databinding adapter, to customize *View related attributes e.g: setPriceTag, configuring recyclerview, and many more
   - Using ObservableField from Databinding to update and observe value changes without hassle
 - Room
   - Configuring sqlite never been this easy with room, no more cursor loader and manual sql statement to have a CRUD
+  - FTS4 (Full-text search) used for searching local SQLite data
 - Koin
   - Easy injection on unit / ui test
   - injecting viewmodel and sharedViewModel (share same viewmodel along fragment)
