@@ -39,3 +39,6 @@ fun <T> Array<T>.leftShift(d: Int) {
     System.arraycopy(right, 0, this, 0, right.size)
     System.arraycopy(left, 0, this, right.size, left.size)
 }
+
+infix fun <T> Collection<T>.sameContentWith(collection: Collection<T>?) =
+        collection?.let { this.size == it.size && this.containsAll(it) }

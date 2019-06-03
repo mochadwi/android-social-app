@@ -1,9 +1,6 @@
 package io.mochadwi.data.repository
 
-import io.mochadwi.data.datasource.room.CategoryDao
-import io.mochadwi.data.datasource.room.CategoryEntity
-import io.mochadwi.data.datasource.room.UserDao
-import io.mochadwi.data.datasource.room.UserEntity
+import io.mochadwi.data.datasource.room.*
 import io.mochadwi.data.datasource.webservice.AppWebDatasource
 import io.mochadwi.data.datasource.webservice.json.category.CategoryResponse
 import io.mochadwi.data.datasource.webservice.json.category.MasterResponse
@@ -12,6 +9,8 @@ import io.mochadwi.domain.category.MasterModel
 import io.mochadwi.domain.post.PostModel
 import io.mochadwi.domain.user.UserModel
 import io.mochadwi.util.ext.coroutineAsync
+import io.mochadwi.util.ext.default
+import io.mochadwi.util.ext.sameContentWith
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 
@@ -43,7 +42,8 @@ interface AppRepository {
 class AppRepositoryImpl(
         private val appWebDatasource: AppWebDatasource,
         private val categoryDao: CategoryDao,
-        private val userDao: UserDao
+        private val userDao: UserDao,
+        private val postDao: PostDao
 ) : AppRepository {
 
     override fun getMasterCategoryAsync(): Deferred<List<MasterModel>?> = coroutineAsync(IO) {
@@ -145,12 +145,23 @@ class AppRepositoryImpl(
     }
 
     override fun getPostsAsync(): Deferred<List<PostModel>?> = coroutineAsync(IO) {
-        remoteGetPostsAsync().await()
+        val local = localGetPostsAsync().await() ?: emptyList()
+        val remote = remoteGetPostsAsync().await() ?: emptyList()
+
+        if ((local sameContentWith remote).default) local
+        else remote
+    }
+
+    private fun localGetPostsAsync(): Deferred<List<PostModel>?> = coroutineAsync(IO) {
+        postDao.getAllPosts().map {
+            PostModel.from(it)
+        }
     }
 
     private fun remoteGetPostsAsync(): Deferred<List<PostModel>?> = coroutineAsync(IO) {
         val result = appWebDatasource.getPostsAsync().await()
         result.map {
+            postDao.upsert(PostEntity.from(it))
             PostModel.from(it)
         }
     }
