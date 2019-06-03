@@ -1,5 +1,8 @@
 package io.mochadwi.data.datasource.webservice.json.post
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PostResponse(
         val userId: Int = 0, // 10
         val id: Int = 0, // 100

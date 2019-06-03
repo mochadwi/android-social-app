@@ -144,7 +144,15 @@ class AppRepositoryImpl(
         }
     }
 
-    override fun getPostsAsync(): Deferred<List<PostModel>?> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getPostsAsync(): Deferred<List<PostModel>?> = coroutineAsync(IO) {
+        remoteGetPostsAsync().await()
     }
+
+    private fun remoteGetPostsAsync(): Deferred<List<PostModel>?> = coroutineAsync(IO) {
+        val result = appWebDatasource.getPostsAsync().await()
+        result.map {
+            PostModel.from(it)
+        }
+    }
+
 }
