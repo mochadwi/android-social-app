@@ -15,4 +15,7 @@ import androidx.room.Query
 abstract class PostDao : BaseDao<PostEntity> {
     @Query("SELECT * FROM tbl_post")
     abstract suspend fun getAllPosts(): List<PostEntity>
+
+    @Query("SELECT * FROM tbl_post WHERE tbl_post MATCH :query")
+    abstract suspend fun searchPosts(query: String): List<PostEntity>
 }
