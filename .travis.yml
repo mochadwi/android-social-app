@@ -8,6 +8,10 @@ stages:
   - name: assemble
     if: branch = master
 
+# Only clone the most recent commit.
+git:
+  depth: 1
+
 env:
   global:
     - PLACEHOLDER_PASS="placeholder"
