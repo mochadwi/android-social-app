@@ -8,7 +8,7 @@ android:
     - extra-android-m2repository
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-google_apis-28
+    - sys-img-armeabi-v7a-google_apis-22
   licenses:
     - android-sdk-preview-license-52d11cd2
     - android-sdk-license-.+
@@ -45,6 +45,7 @@ env:
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
     - ANDROID_TARGET_SDK=28
+    - ADB_INSTALL_TIMEOUT=10
 
 # Only clone the most recent commit.
 git:
@@ -57,11 +58,12 @@ jobs:
     #      stage: build_and_test
     - name: "Instrumentation tests"
       script:
-        - "echo no | android create avd --force -n test -t \"android-28\" --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
+        - "echo no | android create avd --force -n test -t android-22 --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
         - "emulator -avd test -no-skin -no-audio -no-window &"
         - android-wait-for-emulator
         - "adb shell input keyevent 82 &"
         - "adb shell setprop dalvik.vm.dexopt-flags v=n,o=v"
+        - android list target
         - "./gradlew mergedJacocoReport assembleAndroidTest connectedCheck -PdisablePreDex"
       stage: ui_test
 
