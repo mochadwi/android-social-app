@@ -58,7 +58,7 @@ class AppDaoTest : KoinTest {
 
     @Test
     fun test_searchPostsDao() = runBlocking {
-        val result = postDao.searchPosts("foo")
+        val result = postDao.searchPosts("a")
         result.forEach(::println)
 
         assertEquals(true, result.isNotEmpty())

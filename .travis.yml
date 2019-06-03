@@ -3,9 +3,9 @@ sudo: required
 jdk: oraclejdk8
 
 stages:
-  - build
-  - test
-  - name: assemble
+  - build_and_test
+  - ui_test
+  - name: deploy
     if: branch = master
 
 # Only clone the most recent commit.
@@ -61,15 +61,13 @@ before_script:
 
 jobs:
   include:
-    - stage: build
-      name: "Clean build"
+    - stage: build_and_test
+      name: "Clean build and test"
       script: ./gradlew clean build
 
-    - stage: test
-      name: "Unit tests"
-      script: ./gradlew test
-    - script:
-        - ./gradlew build jacocoTestReport assembleAndroidTest
+    - stage: ui_test
+      script:
+        - ./gradlew mergedJacocoReport assembleAndroidTest
         - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a -c 100M
         - emulator -avd test -no-skin -no-audio -no-window &
         - android-wait-for-emulator
@@ -78,11 +76,12 @@ jobs:
         - ./gradlew connectedCheck
       name: "Instrumentation tests"
 
-    - stage: assemble
-      name: "Assemble"
-      script:
-        # upload to fabric crashlyticsUploadDistributionRelease- ./gradlew build jacocoTestReport assembleAndroidTest
-        - ./gradlew --no-daemon --parallel --stacktrace clean assembleDevelopmentDebug
+    - stage: deploy
+      name: "Deploy"
+        #      script:
+        # todo upload to fabric `crashlyticsUploadDistributionDevelopment` or playstore publishDevelopment
+        # e.g: ./gradlew --no-daemon --parallel --stacktrace clean assembleDevelopmentDebug
+        - ./gradlew task
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
