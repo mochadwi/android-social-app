@@ -46,7 +46,7 @@ env:
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
     - ANDROID_TARGET_SDK=28
-    - ADB_INSTALL_TIMEOUT=10
+    - ADB_INSTALL_TIMEOUT=8
 
 # Only clone the most recent commit.
 git:
