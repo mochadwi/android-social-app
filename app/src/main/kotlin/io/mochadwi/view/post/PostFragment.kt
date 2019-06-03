@@ -17,6 +17,7 @@ import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.util.base.BaseApiModel
 import io.mochadwi.util.base.BaseUserActionListener
+import io.mochadwi.util.ext.default
 import io.mochadwi.util.ext.fromJson
 import io.mochadwi.util.ext.putArgs
 import io.mochadwi.util.list.EndlessRecyclerOnScrollListener
@@ -95,7 +96,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                             viewModel.apply {
                                 // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
                                 postListSet.clear()
-                                getPosts()
+                                searchPosts(query.default)
                             }
                             return true
                         }

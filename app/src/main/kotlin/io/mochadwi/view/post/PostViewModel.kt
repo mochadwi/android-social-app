@@ -52,6 +52,20 @@ class PostViewModel(
         }
     }
 
+    fun searchPosts(query: String) {
+        _states.value = LoadingState
+
+        launch {
+            try {
+                val posts = appRepository.searchPostsAsync(query).await()
+
+                _states.value = PostListState.from(posts!!)
+            } catch (error: Throwable) {
+                _states.value = ErrorState(error)
+            }
+        }
+    }
+
     data class PostListState(
             val list: List<PostModel>
     ) : State() {
