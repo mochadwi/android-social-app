@@ -94,7 +94,7 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                         override fun onQueryTextSubmit(query: String?): Boolean {
                             viewModel.apply {
                                 // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
-                                userListSet.clear()
+                                postListSet.clear()
                                 getPosts()
                             }
                             return true
@@ -193,8 +193,8 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
 
     private fun showCategoryItemList(isFirst: Boolean = true, posts: List<PostItem>) = with(viewBinding) {
         viewModel.apply {
-            if (isFirst) userListSet.clear()
-            userListSet.addAll(posts.toMutableList())
+            if (isFirst) postListSet.clear()
+            postListSet.addAll(posts.toMutableList())
             isRefreshing.set(false)
             progress.set(false)
             isError.set(false)

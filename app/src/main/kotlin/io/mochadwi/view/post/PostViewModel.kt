@@ -28,7 +28,7 @@ class PostViewModel(
 ) : BaseViewModel(schedulerProvider) {
 
     val keywords = ObservableField<String>("")
-    var userListSet = MutableSetObservableField<PostItem>()
+    var postListSet = MutableSetObservableField<PostItem>()
 
     /*
      * We use LiveEvent to publish "states"

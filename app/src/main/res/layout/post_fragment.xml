@@ -44,7 +44,7 @@
                     layout="@layout/custom_list"
                     bind:isGrid="@{true}"
                     bind:layoutId="@{R.layout.post_item}"
-                    bind:list="@{vm.userListSet}"
+                    bind:list="@{vm.postListSet}"
                     bind:spanCount="@{2}"
                     bind:vm="@{vm}"
                     />
