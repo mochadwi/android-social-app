@@ -14,7 +14,8 @@ import androidx.room.TypeConverters
 
 @Database(entities = [
     UserEntity::class,
-    PostEntity::class], version = 1)
+    PostEntity::class,
+    PostFts::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

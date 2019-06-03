@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a0a0b689f7e55104c9768220287c9d91",
+    "identityHash": "c0e80a99a2aee72e5ab32f5dfc2c79c2",
     "entities": [
       {
         "tableName": "tbl_user",
@@ -169,12 +169,47 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "ftsVersion": "FTS4",
+        "ftsOptions": {
+          "tokenizer": "simple",
+          "tokenizerArgs": [],
+          "contentTable": "tbl_post",
+          "languageIdColumnName": "",
+          "matchInfo": "FTS4",
+          "notIndexedColumns": [],
+          "prefixSizes": [],
+          "preferredOrder": "ASC"
+        },
+        "contentSyncTriggers": [
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_tbl_post_fts_BEFORE_UPDATE BEFORE UPDATE ON `tbl_post` BEGIN DELETE FROM `tbl_post_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_tbl_post_fts_BEFORE_DELETE BEFORE DELETE ON `tbl_post` BEGIN DELETE FROM `tbl_post_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_tbl_post_fts_AFTER_UPDATE AFTER UPDATE ON `tbl_post` BEGIN INSERT INTO `tbl_post_fts`(`docid`, `body`) VALUES (NEW.`rowid`, NEW.`body`); END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_tbl_post_fts_AFTER_INSERT AFTER INSERT ON `tbl_post` BEGIN INSERT INTO `tbl_post_fts`(`docid`, `body`) VALUES (NEW.`rowid`, NEW.`body`); END"
+        ],
+        "tableName": "tbl_post_fts",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`body` TEXT NOT NULL, content=`tbl_post`)",
+        "fields": [
+          {
+            "fieldPath": "body",
+            "columnName": "body",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a0a0b689f7e55104c9768220287c9d91\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c0e80a99a2aee72e5ab32f5dfc2c79c2\")"
     ]
   }
 }
