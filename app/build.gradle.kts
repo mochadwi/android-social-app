@@ -214,6 +214,7 @@ tasks.withType<KotlinCompile>().all {
     kotlinOptions.freeCompilerArgs += listOf(
             "-Xuse-experimental=kotlinx.serialization.ImplicitReflectionSerializer",
             "-Xuse-experimental=kotlinx.serialization.UnstableDefault",
-            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
     )
 }
