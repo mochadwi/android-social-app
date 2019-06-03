@@ -56,7 +56,6 @@ android {
             isRenderscriptDebuggable = false
             isPseudoLocalesEnabled = false
             isZipAlignEnabled = true
-            isTestCoverageEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
