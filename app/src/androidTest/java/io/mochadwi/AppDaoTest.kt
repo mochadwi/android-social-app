@@ -6,7 +6,6 @@ import io.mochadwi.data.datasource.room.PostDao
 import io.mochadwi.util.mock.MockedData.mockPostsEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,11 +35,6 @@ class AppDaoTest : KoinTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-
-    @Before
-    fun before() {
-        postDao.delete(mockPostsEntity)
-    }
 
     @Test
     fun test_insertPostDao() = runBlocking {
