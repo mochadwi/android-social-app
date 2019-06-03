@@ -1,5 +1,6 @@
 package io.mochadwi.domain.post
 
+import io.mochadwi.data.datasource.room.PostEntity
 import io.mochadwi.data.datasource.webservice.json.post.PostResponse
 
 data class PostModel(
@@ -10,6 +11,10 @@ data class PostModel(
 ) {
     companion object {
         fun from(post: PostResponse) = with(post) {
+            PostModel(userId, id, title, body)
+        }
+
+        fun from(post: PostEntity) = with(post) {
             PostModel(userId, id, title, body)
         }
     }

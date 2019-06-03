@@ -12,10 +12,14 @@ import androidx.room.TypeConverters
  *
  */
 
-@Database(entities = [CategoryEntity::class, UserEntity::class], version = 1)
+@Database(entities = [
+    CategoryEntity::class,
+    UserEntity::class,
+    PostEntity::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
     abstract fun userDao(): UserDao
+    abstract fun postDao(): PostDao
 }
