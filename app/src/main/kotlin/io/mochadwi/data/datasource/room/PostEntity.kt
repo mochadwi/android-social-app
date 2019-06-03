@@ -1,11 +1,9 @@
 package io.mochadwi.data.datasource.room
 
 import androidx.room.Entity
-import androidx.room.Fts4
 import androidx.room.PrimaryKey
 import io.mochadwi.data.datasource.webservice.json.post.PostResponse
 
-@Fts4
 @Entity(tableName = "tbl_post")
 data class PostEntity(
         @PrimaryKey

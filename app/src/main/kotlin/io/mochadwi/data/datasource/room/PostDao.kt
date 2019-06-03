@@ -16,6 +16,10 @@ abstract class PostDao : BaseDao<PostEntity> {
     @Query("SELECT * FROM tbl_post")
     abstract suspend fun getAllPosts(): List<PostEntity>
 
-    @Query("SELECT * FROM tbl_post WHERE tbl_post MATCH :query")
+    @Query("""
+        SELECT tbl_post.* FROM tbl_post_fts
+        JOIN tbl_post ON tbl_post_fts.rowId = id
+        WHERE tbl_post_fts MATCH :query
+    """)
     abstract suspend fun searchPosts(query: String): List<PostEntity>
 }
