@@ -79,7 +79,7 @@ class PostViewModelMockTest : KoinTest {
         // Test obtained values in order
         assertEquals(2, values.size)
         assertEquals(LoadingState, values[0])
-        assertEquals(PostViewModel.PostListState.from(mockPostsModel), values[1])
+        assertEquals(PostViewModel.PostListState.from(false, mockPostsModel), values[1])
     }
 
     @Test

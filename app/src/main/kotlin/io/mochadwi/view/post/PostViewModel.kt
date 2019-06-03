@@ -1,6 +1,5 @@
 package io.mochadwi.view.post
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import io.mochadwi.data.repository.AppRepository
 import io.mochadwi.domain.ErrorState
@@ -13,6 +12,8 @@ import io.mochadwi.util.mvvm.LiveEvent
 import io.mochadwi.util.mvvm.MutableSetObservableField
 import io.mochadwi.util.rx.SchedulerProvider
 import io.mochadwi.view.post.list.PostItem
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 
 /**
  *
@@ -27,7 +28,7 @@ class PostViewModel(
         schedulerProvider: SchedulerProvider
 ) : BaseViewModel(schedulerProvider) {
 
-    val keywords = ObservableField<String>("")
+    val keywords = Channel<String>(UNLIMITED)
     var postListSet = MutableSetObservableField<PostItem>()
 
     /*
@@ -45,7 +46,7 @@ class PostViewModel(
             try {
                 val posts = appRepository.getPostsAsync().await()
 
-                _states.value = PostListState.from(posts!!)
+                _states.value = PostListState.from(false, posts!!)
             } catch (error: Throwable) {
                 _states.value = ErrorState(error)
             }
@@ -59,7 +60,7 @@ class PostViewModel(
             try {
                 val posts = appRepository.searchPostsAsync(query).await()
 
-                _states.value = PostListState.from(posts!!)
+                _states.value = PostListState.from(query.isNotBlank(), posts!!)
             } catch (error: Throwable) {
                 _states.value = ErrorState(error)
             }
@@ -67,15 +68,16 @@ class PostViewModel(
     }
 
     data class PostListState(
+            val isSearch: Boolean,
             val list: List<PostModel>
     ) : State() {
         companion object {
-            fun from(list: List<PostModel>): PostListState {
+            fun from(isSearch: Boolean, list: List<PostModel>): PostListState {
                 return with(list) {
                     when {
                         // TODO: @mochadwi Move this into strings instead
-                        isEmpty() -> error("There's an empty user instead, please check your keyword")
-                        else -> PostListState(this)
+                        isEmpty() -> error("There's an empty post instead, please check your keyword")
+                        else -> PostListState(isSearch, this)
                     }
                 }
             }

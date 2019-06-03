@@ -17,12 +17,17 @@ import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.util.base.BaseApiModel
 import io.mochadwi.util.base.BaseUserActionListener
+import io.mochadwi.util.ext.coroutineLaunch
 import io.mochadwi.util.ext.default
 import io.mochadwi.util.ext.fromJson
 import io.mochadwi.util.ext.putArgs
 import io.mochadwi.util.list.EndlessRecyclerOnScrollListener
 import io.mochadwi.view.HomeActivity
 import io.mochadwi.view.post.list.PostItem
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.delay
 import kotlinx.serialization.serializer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
@@ -35,11 +40,12 @@ import retrofit2.HttpException
  * dedicated to build social-app
  *
  */
-class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextListener {
+class PostFragment : Fragment(), BaseUserActionListener {
 
     private lateinit var viewBinding: PostFragmentBinding
     private val viewModel by viewModel<PostViewModel>()
     private lateinit var onLoadMore: EndlessRecyclerOnScrollListener
+    private lateinit var broadcast: Channel<String>
 
     companion object {
         fun newInstance() = PostFragment()
@@ -89,20 +95,32 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         val searchManager = getSystemService(requireContext(), SearchManager::class.java)
         val componentName = ComponentName(requireContext(), HomeActivity::class.java)
         val searchItem = menu.findItem(R.id.actSearch)
+
+        var searchFor = ""
         val searchView = (searchItem?.actionView as SearchView).apply {
+            // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
             setOnQueryTextListener(
                     object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {
-                            viewModel.apply {
-                                // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
-                                postListSet.clear()
-                                searchPosts(query.default)
+                            coroutineLaunch(Main) {
+                                viewModel.keywords.send(query.default)
                             }
                             return true
                         }
 
                         override fun onQueryTextChange(newText: String?): Boolean {
-                            viewModel.keywords.set(newText)
+                            val searchText = newText.default.trim()
+
+                            if (searchText == searchFor) return false
+
+                            searchFor = searchText
+                            coroutineLaunch(Main) {
+                                delay(300)
+                                if (searchText != searchFor)
+                                    return@coroutineLaunch
+
+                                viewModel.keywords.send(newText.default)
+                            }
                             return true
                         }
                     }
@@ -115,14 +133,6 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         Handler().postDelayed({
             pullToRefresh()
         }, 1000)
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun setupData() = with(viewBinding) {
@@ -138,7 +148,9 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                 when (state) {
                     is LoadingState -> showIsLoading()
                     is PostViewModel.PostListState -> {
-                        showCategoryItemList(posts = state.list.map { PostItem.from(it) })
+                        showCategoryItemList(
+                                isSearch = state.isSearch,
+                                posts = state.list.map { PostItem.from(it) })
                     }
                     is ErrorState -> showError(state.error)
                     else -> {
@@ -147,6 +159,10 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                 }
             }
         })
+
+        coroutineLaunch(Main) {
+            keywords.consumeEach { searchPosts(it) }
+        }
     }
 
     private fun pullToRefresh() {
@@ -192,9 +208,9 @@ class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         }
     }
 
-    private fun showCategoryItemList(isFirst: Boolean = true, posts: List<PostItem>) = with(viewBinding) {
+    private fun showCategoryItemList(isSearch: Boolean = false, posts: List<PostItem>) = with(viewBinding) {
         viewModel.apply {
-            if (isFirst) postListSet.clear()
+            if (isSearch) postListSet.clear()
             postListSet.addAll(posts.toMutableList())
             isRefreshing.set(false)
             progress.set(false)
