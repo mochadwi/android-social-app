@@ -52,9 +52,9 @@ git:
 jdk: oraclejdk8
 jobs:
   include:
-    - name: "Clean build and test"
-      script: "./gradlew clean build"
-      stage: build_and_test
+    #    - name: "Clean build and test"
+    #      script: "./gradlew clean build"
+    #      stage: build_and_test
     - name: "Instrumentation tests"
       script:
         - "echo no | android create avd --force -n test -t \"android-28\" --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
@@ -72,7 +72,7 @@ jobs:
       stage: deploy
 language: android
 stages:
-  - build_and_test
+  #  - build_and_test
   - ui_test
   - if: "branch = master"
     name: deploy
