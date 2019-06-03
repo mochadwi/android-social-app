@@ -1,4 +1,4 @@
-package io.mochadwi.view.user
+package io.mochadwi.view.post
 
 import android.app.SearchManager
 import android.content.ComponentName
@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.mochadwi.R
-import io.mochadwi.databinding.UserFragmentBinding
+import io.mochadwi.databinding.PostFragmentBinding
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
 import io.mochadwi.util.base.BaseApiModel
@@ -22,7 +22,7 @@ import io.mochadwi.util.ext.fromJson
 import io.mochadwi.util.ext.putArgs
 import io.mochadwi.util.list.EndlessRecyclerOnScrollListener
 import io.mochadwi.view.HomeActivity
-import io.mochadwi.view.user.list.UserItem
+import io.mochadwi.view.post.list.PostItem
 import kotlinx.serialization.serializer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.HttpException
@@ -35,15 +35,15 @@ import retrofit2.HttpException
  * dedicated to build social-app
  *
  */
-class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextListener {
+class PostFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextListener {
 
-    private lateinit var viewBinding: UserFragmentBinding
-    private val viewModel by viewModel<UserViewModel>()
+    private lateinit var viewBinding: PostFragmentBinding
+    private val viewModel by viewModel<PostViewModel>()
     private lateinit var onLoadMore: EndlessRecyclerOnScrollListener
 
     companion object {
-        fun newInstance() = UserFragment()
-        fun newInstance(title: String) = UserFragment().putArgs {
+        fun newInstance() = PostFragment()
+        fun newInstance(title: String) = PostFragment().putArgs {
             putString("keywords", title)
         }
     }
@@ -58,10 +58,10 @@ class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View {
-        viewBinding = UserFragmentBinding
+        viewBinding = PostFragmentBinding
                 .inflate(inflater, container, false)
                 .apply {
-                    listener = this@UserFragment
+                    listener = this@PostFragment
                     vm = viewModel
                 }
         return viewBinding.root
@@ -137,8 +137,8 @@ class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
             state?.let {
                 when (state) {
                     is LoadingState -> showIsLoading()
-                    is UserViewModel.UserListState -> {
-                        showCategoryItemList(state.isFirst, state.list.map { UserItem.from(it) })
+                    is PostViewModel.UserListState -> {
+                        showCategoryItemList(state.isFirst, state.list.map { PostItem.from(it) })
                         setupEndlessScroll(state.isFirst, state.isLocal)
                     }
                     is ErrorState -> showError(state.error)
@@ -193,10 +193,10 @@ class UserFragment : Fragment(), BaseUserActionListener, SearchView.OnQueryTextL
         }
     }
 
-    private fun showCategoryItemList(isFirst: Boolean, users: List<UserItem>) = with(viewBinding) {
+    private fun showCategoryItemList(isFirst: Boolean, posts: List<PostItem>) = with(viewBinding) {
         viewModel.apply {
             if (isFirst) userListSet.clear()
-            userListSet.addAll(users.toMutableList())
+            userListSet.addAll(posts.toMutableList())
             isRefreshing.set(false)
             progress.set(false)
             isError.set(false)

@@ -8,8 +8,8 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="io.mochadwi.view.user.UserFragment"
-        android:label="UserFragment"
-        tools:layout="@layout/user_fragment"/>
+        android:name="io.mochadwi.view.post.PostFragment"
+        android:label="PostFragment"
+        tools:layout="@layout/post_fragment"/>
 
 </navigation>

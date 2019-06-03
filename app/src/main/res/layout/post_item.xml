@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="io.mochadwi.view.user.list.UserItem"/>
+            type="io.mochadwi.view.post.list.PostItem"/>
     </data>
 
     <androidx.cardview.widget.CardView

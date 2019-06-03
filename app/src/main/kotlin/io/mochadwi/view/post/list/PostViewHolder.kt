@@ -1,8 +1,8 @@
-package io.mochadwi.view.user.list
+package io.mochadwi.view.post.list
 
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import io.mochadwi.databinding.UserItemBinding
+import io.mochadwi.databinding.PostItemBinding
 import io.mochadwi.util.base.BaseBindableAdapter
 import io.mochadwi.util.ext.bundleOf
 import io.mochadwi.util.ext.into
@@ -17,11 +17,11 @@ import io.mochadwi.view.userdetail.UserDetailActivity
  *
  */
 
-class UserViewHolder(val binding: UserItemBinding) :
+class PostViewHolder(val binding: PostItemBinding) :
         RecyclerView.ViewHolder(binding.root),
-        BaseBindableAdapter<UserItem> {
+        BaseBindableAdapter<PostItem> {
 
-    override fun bind(data: UserItem) {
+    override fun bind(data: PostItem) {
         binding.apply {
             item = data
             root.setOnClickListener {

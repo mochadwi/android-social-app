@@ -1,6 +1,6 @@
 package io.mochadwi.util.ext
 
-import io.mochadwi.view.user.list.UserItem
+import io.mochadwi.view.post.list.PostItem
 
 /**
  *
@@ -26,5 +26,5 @@ val String?.default: String
 val <T> ArrayList<T>?.default: ArrayList<T>
     get() = this ?: arrayListOf()
 
-val UserItem?.default: UserItem
-    get() = this ?: UserItem()
+val PostItem?.default: PostItem
+    get() = this ?: PostItem()

@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import io.mochadwi.databinding.UserItemBinding
+import io.mochadwi.databinding.PostItemBinding
 import io.mochadwi.util.ext.setupGridLayoutManager
 import io.mochadwi.util.ext.setupLinearLayoutManager
 import io.mochadwi.util.helper.GenericAdapter
-import io.mochadwi.view.user.list.UserViewHolder
+import io.mochadwi.view.post.list.PostViewHolder
 
 /**
  *
@@ -53,7 +53,7 @@ object ListBinding {
 
                 // TODO: Refactor to generic instead of using when condition
                 override fun getViewHolder(viewBinding: ViewDataBinding): RecyclerView.ViewHolder {
-                    return UserViewHolder(viewBinding as UserItemBinding)
+                    return PostViewHolder(viewBinding as PostItemBinding)
                 }
             }
         } catch (e: Exception) {

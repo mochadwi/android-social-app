@@ -8,7 +8,7 @@ import io.mochadwi.data.repository.AppRepository
 import io.mochadwi.data.repository.AppRepositoryImpl
 import io.mochadwi.util.rx.ApplicationSchedulerProvider
 import io.mochadwi.util.rx.SchedulerProvider
-import io.mochadwi.view.user.UserViewModel
+import io.mochadwi.view.post.PostViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -25,7 +25,7 @@ val rxModule = module {
 val viewModelModule = module {
 
     // ViewModel for Social app
-    viewModel { UserViewModel(get(), get()) }
+    viewModel { PostViewModel(get(), get()) }
 }
 
 val roomModule = module {

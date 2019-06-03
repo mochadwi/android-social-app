@@ -13,7 +13,7 @@
 
         <variable
             name="vm"
-            type="io.mochadwi.view.user.UserViewModel"/>
+            type="io.mochadwi.view.post.PostViewModel"/>
 
         <variable
             name="listener"
@@ -43,7 +43,7 @@
                     android:id="@+id/list"
                     layout="@layout/custom_list"
                     bind:isGrid="@{true}"
-                    bind:layoutId="@{R.layout.user_item}"
+                    bind:layoutId="@{R.layout.post_item}"
                     bind:list="@{vm.userListSet}"
                     bind:spanCount="@{2}"
                     bind:vm="@{vm}"

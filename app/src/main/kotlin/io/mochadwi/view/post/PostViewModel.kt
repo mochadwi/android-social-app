@@ -1,4 +1,4 @@
-package io.mochadwi.view.user
+package io.mochadwi.view.post
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -14,7 +14,7 @@ import io.mochadwi.util.ext.toSingleEvent
 import io.mochadwi.util.mvvm.LiveEvent
 import io.mochadwi.util.mvvm.MutableSetObservableField
 import io.mochadwi.util.rx.SchedulerProvider
-import io.mochadwi.view.user.list.UserItem
+import io.mochadwi.view.post.list.PostItem
 
 /**
  *
@@ -24,13 +24,13 @@ import io.mochadwi.view.user.list.UserItem
  *
  */
 
-class UserViewModel(
+class PostViewModel(
         private val appRepository: AppRepository,
         schedulerProvider: SchedulerProvider
 ) : BaseViewModel(schedulerProvider) {
 
     val keywords = ObservableField<String>("")
-    var userListSet = MutableSetObservableField<UserItem>()
+    var userListSet = MutableSetObservableField<PostItem>()
 
     /*
      * We use LiveEvent to publish "states"

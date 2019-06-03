@@ -13,7 +13,7 @@ import io.mochadwi.util.mock.MockedData.mockUserQuery
 import io.mochadwi.util.mock.MockedData.mockUsername
 import io.mochadwi.util.mock.MockedData.mockUsersModel
 import io.mochadwi.util.toDeferred
-import io.mochadwi.view.user.UserViewModel
+import io.mochadwi.view.post.PostViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -38,12 +38,12 @@ import org.mockito.MockitoAnnotations
  *
  */
 @ExperimentalCoroutinesApi
-class UserViewModelMockTest : KoinTest {
+class PostViewModelMockTest : KoinTest {
 
     @Mock
     lateinit var repository: AppRepository
-    val viewModel: UserViewModel by lazy {
-        UserViewModel(repository, TestSchedulerProvider())
+    val viewModel: PostViewModel by lazy {
+        PostViewModel(repository, TestSchedulerProvider())
     }
 
     @Mock
@@ -68,7 +68,7 @@ class UserViewModelMockTest : KoinTest {
     }
 
     @Test
-    fun `test CategoryViewModel getUserByKeyword Succeed`() = runBlockingTest {
+    fun `test PostViewModel getUserByKeyword Succeed`() = runBlockingTest {
         val page = 1
         given(repository.getUsersAsync(mockUserQuery)).willReturn(mockUsersModel.toDeferred())
 
@@ -83,11 +83,11 @@ class UserViewModelMockTest : KoinTest {
         // Test obtained values in order
         assertEquals(2, values.size)
         assertEquals(LoadingState, values[0])
-        assertEquals(UserViewModel.UserListState.from(page == 1, false, mockUsersModel), values[1])
+        assertEquals(PostViewModel.UserListState.from(page == 1, false, mockUsersModel), values[1])
     }
 
     @Test
-    fun `test CategoryViewModel getUserByKeyword Failed`() = runBlockingTest {
+    fun `test PostViewModel getUserByKeyword Failed`() = runBlockingTest {
         val error = Throwable("got an error")
         given(repository.getUsersAsync(mockUserQuery)).will { throw error }
 

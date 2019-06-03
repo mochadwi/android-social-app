@@ -1,4 +1,4 @@
-package io.mochadwi.view.user.list
+package io.mochadwi.view.post.list
 
 import android.os.Parcelable
 import io.mochadwi.data.datasource.room.UserEntity
@@ -14,7 +14,7 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class UserItem(
+data class PostItem(
         val id: Int = 0, // 1
         val login: String = "", // mojombo
         val node_id: String = "", // MDQ6VXNlcjE=
@@ -37,13 +37,13 @@ data class UserItem(
 ) : Parcelable {
     companion object {
         fun from(model: UserModel) = with(model) {
-            UserItem(id, login, node_id, avatar_url, gravatar_id, url, html_url, followers_url,
+            PostItem(id, login, node_id, avatar_url, gravatar_id, url, html_url, followers_url,
                     following_url, gists_url, starred_url, subscriptions_url, organizations_url,
                     repos_url, events_url, received_events_url, type, site_admin, score)
         }
 
         fun from(entity: UserEntity) = with(entity) {
-            UserItem(id, login, node_id, avatar_url, gravatar_id, url, html_url, followers_url,
+            PostItem(id, login, node_id, avatar_url, gravatar_id, url, html_url, followers_url,
                     following_url, gists_url, starred_url, subscriptions_url, organizations_url,
                     repos_url, events_url, received_events_url, type, site_admin, score)
         }

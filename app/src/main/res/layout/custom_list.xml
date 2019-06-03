@@ -21,7 +21,7 @@
 
         <variable
             name="list"
-            type="io.mochadwi.util.mvvm.MutableSetObservableField&lt;io.mochadwi.view.user.list.UserItem>"/>
+            type="io.mochadwi.util.mvvm.MutableSetObservableField&lt;io.mochadwi.view.post.list.PostItem>"/>
 
         <variable
             name="layoutId"
@@ -73,7 +73,7 @@
                 list:orientation="@{orientation ?? 0}"
                 list:spanCount="@{spanCount ?? 0}"
                 list:viewType="@{viewType ?? 1}"
-                tools:listitem="@layout/user_item"
+                tools:listitem="@layout/post_item"
                 />
 
         </androidx.cardview.widget.CardView>

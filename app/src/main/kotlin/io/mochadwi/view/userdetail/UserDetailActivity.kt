@@ -6,7 +6,7 @@ import io.mochadwi.R
 import io.mochadwi.databinding.UserdetailActivityBinding
 import io.mochadwi.util.base.BaseActivity
 import io.mochadwi.util.ext.replaceFragmentInActivity
-import io.mochadwi.view.user.list.UserItem
+import io.mochadwi.view.post.list.PostItem
 
 /**
  *
@@ -24,7 +24,7 @@ class UserDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val item = intent?.getParcelableExtra("product_detail") ?: UserItem()
+        val item = intent?.getParcelableExtra("product_detail") ?: PostItem()
 
         viewBinding.apply {
             setupToolbar(toolbar.tbCustom, isDetailActivity = true, newTitle = item.login)

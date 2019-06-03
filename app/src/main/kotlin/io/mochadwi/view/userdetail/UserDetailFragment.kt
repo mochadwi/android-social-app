@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import io.mochadwi.databinding.UserdetailFragmentBinding
 import io.mochadwi.util.base.BaseUserActionListener
 import io.mochadwi.util.ext.putArgs
-import io.mochadwi.view.user.list.UserItem
+import io.mochadwi.view.post.list.PostItem
 
 
 /**
@@ -24,7 +24,7 @@ class UserDetailFragment : Fragment(), BaseUserActionListener {
 
     companion object {
         fun newInstance() = UserDetailFragment()
-        fun newInstance(data: UserItem) = UserDetailFragment().putArgs {
+        fun newInstance(data: PostItem) = UserDetailFragment().putArgs {
             putParcelable("product_detail", data)
         }
     }
