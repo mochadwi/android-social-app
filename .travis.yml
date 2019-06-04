@@ -7,14 +7,20 @@ after_success:
   - "bash <(curl -s https://codecov.io/bash)"
 android:
   components:
-    #    - tools
-    #    - platform-tools
-    #    - tools # this is necessary fix: https://stackoverflow.com/a/28751112/3763032
+    - tools
+    - platform-tools
+    - tools # this is necessary fix: https://stackoverflow.com/a/28751112/3763032
+    - extra-android-m2repository
+    - build-tools-$ANDROID_BUILD_TOOLS
+    - android-$ANDROID_TARGET_SDK
+    - extra-android-support
+    - extra-google-m2repository
     - extra-android-m2repository
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - android-22
-    - sys-img-armeabi-v7a-google_apis-22
+    - android-$EMULATOR_API
+    - sys-img-armeabi-v7a-google_apis-$EMULATOR_API
+    - sys-img-armeabi-v7a-android-$EMULATOR_API
   licenses:
     - android-sdk-preview-license-52d11cd2
     - android-sdk-license-.+
@@ -34,6 +40,7 @@ before_script:
 cache:
   directories:
     # Android SDK
+    - $HOME/.m2
     - $HOME/android-sdk-dl
     - $HOME/android-sdk
 
@@ -49,11 +56,10 @@ cache:
 dist: trusty
 env:
   global:
-    - PLACEHOLDER_PASS="placeholder"
-    - CODECOV_TOKEN="9989b72c-b770-491a-b9cd-46810bbc47d4"
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
     - ANDROID_TARGET_SDK=28
+    - EMULATOR_API=24
     - ADB_INSTALL_TIMEOUT=5
 
 # Only clone the most recent commit.
@@ -62,18 +68,37 @@ git:
 jdk: oraclejdk8
 jobs:
   include:
-    - name: "Clean build and test"
-      script: "./gradlew clean build"
-      stage: build_and_test
+    #    - name: "Clean build and test"
+    #      script: "./gradlew clean build"
+    #      stage: build_and_test
     - name: "Instrumentation tests"
-      script:
-        - "echo no | android create avd --force -n test -t android-22 --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
-        - "emulator -avd test -no-skin -no-audio -no-window &"
+      before_script:
+        - echo "y" | android update sdk -a --no-ui --filter android-$EMULATOR_API
+        - echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-$EMULATOR_API
+        - echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-google_apis-$EMULATOR_API
+        - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
+        - "echo no | android create avd --force -n test -t android-21 --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
+        - emulator -avd test -no-skin -no-window &
         - android-wait-for-emulator
         - "adb shell input keyevent 82 &"
         - "adb shell setprop dalvik.vm.dexopt-flags v=n,o=v"
-        - android list target
-        - "./gradlew mergedJacocoReport assembleAndroidTest connectedCheck -PdisablePreDex"
+        - adb wait-for-device get-serialno
+      script:
+        - "./gradlew mergedJacocoReport -PdisablePreDex"
+        - |
+          ./gradlew assembleAndroidTest -PdisablePreDex
+          retval=$?
+          if [ $retval -ne 0 ]; then
+            echo "error on assembling, exit code: "$retval
+            exit $retval
+          fi
+        - |
+          ./gradlew :app:installDebug :app:installDebugAndroidTest -PdisablePreDex
+          retval=$?
+          if [ $retval -ne 0 ]; then
+            echo "error on install, exit code: "$retval
+            exit $retval
+          fi
         - sonar-scanner
       stage: ui_test
 
@@ -84,7 +109,7 @@ jobs:
       stage: deploy
 language: android
 stages:
-  - build_and_test
+  #  - build_and_test
   - ui_test
   - if: "branch = master"
     name: deploy
