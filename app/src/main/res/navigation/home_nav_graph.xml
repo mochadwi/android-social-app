@@ -3,13 +3,36 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/homeNavGraph"
-            app:startDestination="@id/userFragment"
+            app:startDestination="@id/postFragment"
     >
 
     <fragment
-        android:id="@+id/userFragment"
+        android:id="@+id/postFragment"
         android:name="io.mochadwi.view.post.PostFragment"
         android:label="PostFragment"
-        tools:layout="@layout/post_fragment"/>
+        tools:layout="@layout/post_fragment">
+
+        <action
+            android:id="@+id/toPostDetailAction"
+            app:destination="@id/postDetailFragment">
+            <argument
+                android:name="postItem"
+                app:argType="io.mochadwi.view.post.list.PostItem"/>
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="io.mochadwi.view.post.PostDetailFragment"
+        android:label="PostDetailFragment"
+        tools:layout="@layout/postdetail_fragment">
+
+        <argument
+            android:name="postItem"
+            app:argType="io.mochadwi.view.post.list.PostItem"
+            app:nullable="true"
+            />
+    </fragment>
 
 </navigation>
