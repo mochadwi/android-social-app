@@ -19,7 +19,7 @@ import io.mochadwi.databinding.PostdetailFragmentBinding
 class PostDetailFragment : Fragment() {
 
     private lateinit var viewBinding: PostdetailFragmentBinding
-    private val args: PostDetailFragmentArgs by navArgs()
+    private val args by navArgs<PostDetailFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
