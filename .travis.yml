@@ -61,9 +61,10 @@ jdk: oraclejdk8
 
 jobs:
   include:
-    #    - name: "Clean build and test"
-    #      script: "./gradlew clean build"
-    #      stage: build_and_test
+    # Only run development debug variant, to speed up build process
+    - name: "Unit test"
+      script: "./gradlew testDevelopmentDebug"
+      stage: test
     - name: "Instrumentation tests"
       before_install:
         # Install the rest of tools (e.g., avdmanager)
@@ -75,7 +76,7 @@ jobs:
 
         # Create and start emulator for the script. Meant to race the install task.
         - echo no | avdmanager create avd --force -n test -k "system-images;android-$EMULATOR_API;default;armeabi-v7a"
-        - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+        - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-skin -netfast -no-window &
 
       before_script:
         - android-wait-for-emulator
@@ -84,15 +85,8 @@ jobs:
         - adb wait-for-device get-serialno
 
       script:
-        - "./gradlew mergedJacocoReport -PdisablePreDex"
-        - |
-          ./gradlew assembleAndroidTest
-          retval=$?
-          if [ $retval -ne 0 ]; then
-            echo "error on assembling, exit code: "$retval
-            exit $retval
-          fi
-        - "./gradlew check connectedCheck -x lint --stacktrace"
+        - "./gradlew mergedJacocoReport assembleDevelopmentDebug assembleDevelopmentDebugAndroidTest -PdisablePreDex"
+        - "./gradlew connectedDevelopmentDebugAndroidTest"
         - sonar-scanner
       stage: ui_test
 
@@ -105,7 +99,7 @@ jobs:
 language: android
 
 stages:
-  #  - build_and_test
+  - test
   - ui_test
   - if: "branch = master"
     name: deploy
