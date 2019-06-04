@@ -5,7 +5,7 @@ import androidx.appcompat.widget.Toolbar
 /**
  *
  * In syaa Allah created or modified by @mochadwi
- * On 2019-06-04 for jsonplaceholder-app
+ * On 2019-06-04 for social-app
  */
 
 interface ToolbarListener {
