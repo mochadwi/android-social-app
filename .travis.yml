@@ -1,3 +1,8 @@
+addons:
+  sonarcloud:
+    organization: "mochadwi-github"
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
 after_success:
   - "bash <(curl -s https://codecov.io/bash)"
 android:
@@ -38,6 +43,9 @@ cache:
 
     # Android build cache (see http://tools.android.com/tech-docs/build-cache)
     - $HOME/.android/build-cache
+
+    # Sonar cache
+    - $HOME/.sonar/cache
 dist: trusty
 env:
   global:
@@ -66,6 +74,7 @@ jobs:
         - "adb shell setprop dalvik.vm.dexopt-flags v=n,o=v"
         - android list target
         - "./gradlew mergedJacocoReport assembleAndroidTest connectedCheck -PdisablePreDex"
+        - sonar-scanner
       stage: ui_test
 
     # todo upload to fabric `crashlyticsUploadDistributionDevelopment` or playstore publishDevelopment
