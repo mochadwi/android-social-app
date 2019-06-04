@@ -19,16 +19,15 @@ object LoadingState : State()
 data class ErrorState(val error: Throwable) : State()
 
 data class PostListState(
-        val isSearch: Boolean,
         val list: List<PostModel>
 ) : State() {
     companion object {
-        fun from(isSearch: Boolean, list: List<PostModel>): PostListState {
+        fun from(list: List<PostModel>): PostListState {
             return with(list) {
                 when {
                     // TODO: @mochadwi Move this into strings instead
                     isEmpty() -> error("There's an empty post instead, please check your keyword")
-                    else -> PostListState(isSearch, this)
+                    else -> PostListState(this)
                 }
             }
         }

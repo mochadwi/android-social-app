@@ -46,7 +46,7 @@ class PostViewModel(
             try {
                 val posts = appRepository.getPostsAsync().await()
 
-                _states.value = PostListState.from(false, posts!!)
+                _states.value = PostListState.from(posts!!)
             } catch (error: Throwable) {
                 _states.value = ErrorState(error)
             }
@@ -61,7 +61,7 @@ class PostViewModel(
                 try {
                     val posts = appRepository.searchPostsAsync(query).await()
 
-                    _states.value = PostListState.from(query.isNotBlank(), posts!!)
+                    _states.value = PostListState.from(posts!!)
                 } catch (error: Throwable) {
                     _states.value = ErrorState(error)
                 }

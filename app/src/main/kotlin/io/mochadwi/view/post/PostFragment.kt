@@ -139,7 +139,6 @@ class PostFragment : Fragment(), BaseUserActionListener {
                     is LoadingState -> showIsLoading()
                     is PostListState -> {
                         showCategoryItemList(
-                                isSearch = state.isSearch,
                                 posts = state.list.map { PostItem.from(it) })
                     }
                     is ErrorState -> showError(state.error)
@@ -195,9 +194,9 @@ class PostFragment : Fragment(), BaseUserActionListener {
         }
     }
 
-    private fun showCategoryItemList(isSearch: Boolean = false, posts: List<PostItem>) {
+    private fun showCategoryItemList(posts: List<PostItem>) {
         viewModel.apply {
-            if (isSearch) postListSet.clear()
+            postListSet.clear()
             postListSet.addAll(posts.toMutableList())
             isRefreshing.set(false)
             progress.set(false)
