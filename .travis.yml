@@ -73,9 +73,6 @@ jobs:
     #      stage: build_and_test
     - name: "Instrumentation tests"
       before_script:
-        - echo "y" | android update sdk -a --no-ui --filter android-$EMULATOR_API
-        - echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-$EMULATOR_API
-        - echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-google_apis-$EMULATOR_API
         - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
         - "echo no | android create avd --force -n test -t android-$EMULATOR_API --abi $ANDROID_ABI --tag $ANDROID_TAG -c 100M"
         - emulator -avd test -no-skin -no-window &
