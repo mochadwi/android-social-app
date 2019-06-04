@@ -9,7 +9,7 @@ import io.mochadwi.R
  * Created by mochadwi on 26/01/18.
  */
 
-open class BaseActivity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity(), ToolbarListener {
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
@@ -21,20 +21,15 @@ open class BaseActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_up, R.anim.slide_down)
     }
 
-    fun setupToolbar(toolbar: Toolbar?,
-                     toolbarIcon: Int = R.drawable.ic_arrow_back_white_24dp,
-                     isDetailActivity: Boolean = false,
-                     newTitle: String = getString(R.string.app_name)) {
+    override fun setupToolbar(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
+    }
+
+    override fun updateTitleToolbar(newTitle: String) {
         supportActionBar?.apply {
             setDisplayShowTitleEnabled(true)
-            setDisplayHomeAsUpEnabled(isDetailActivity)
-            setDisplayUseLogoEnabled(!isDetailActivity)
-            setHomeAsUpIndicator(toolbarIcon)
             title = newTitle
             subtitle = ""
         }
-        toolbar?.title = newTitle
-        toolbar?.subtitle = ""
     }
 }

@@ -16,6 +16,7 @@ import io.mochadwi.domain.LoadingState
 import io.mochadwi.domain.PostListState
 import io.mochadwi.util.base.BaseApiModel
 import io.mochadwi.util.base.BaseUserActionListener
+import io.mochadwi.util.base.ToolbarListener
 import io.mochadwi.util.ext.coroutineLaunch
 import io.mochadwi.util.ext.default
 import io.mochadwi.util.ext.fromJson
@@ -71,6 +72,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        (requireActivity() as ToolbarListener).updateTitleToolbar(newTitle = getString(R.string.app_name))
         setupObserver()
         if (savedInstanceState == null) {
             setupData()
@@ -196,6 +198,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
 
     private fun showCategoryItemList(posts: List<PostItem>) {
         viewModel.apply {
+            // TODO: @mochadwi clearing list doesn't good for pagination?
             postListSet.clear()
             postListSet.addAll(posts.toMutableList())
             isRefreshing.set(false)

@@ -44,7 +44,7 @@ class HomeActivity : BaseActivity() {
         if (::mNavHost.isInitialized) {
             val fragmentsSize = mNavHost.childFragmentManager.fragments.size
 
-            if (fragmentsSize > 1) {
+            if (fragmentsSize >= 1) {
                 super.onBackPressed()
             } else {
                 findNavController(R.id.navHostFragment).navigateUp(appBarConfiguration)
@@ -78,7 +78,7 @@ class HomeActivity : BaseActivity() {
             appBarConfig: AppBarConfiguration
     ) {
         setupToolbar(viewBinding.toolbar.tbCustom)
-        updateTitleToolbar()
         setupActionBarWithNavController(navController, appBarConfig)
     }
+
 }
