@@ -3,40 +3,29 @@ addons:
     organization: "mochadwi-github"
     token:
       secure: $SONAR_TOKEN # encrypted value of your token
+
 after_success:
   - "bash <(curl -s https://codecov.io/bash)"
+
 android:
-  components:
-    - tools
-    - platform-tools
-    - tools # this is necessary fix: https://stackoverflow.com/a/28751112/3763032
-    - extra-android-m2repository
-    - build-tools-$ANDROID_BUILD_TOOLS
-    - android-$ANDROID_TARGET_SDK
-    - extra-android-support
-    - extra-google-m2repository
-    - extra-android-m2repository
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    - android-$EMULATOR_API
-    - sys-img-armeabi-v7a-google_apis-$EMULATOR_API
-    - sys-img-armeabi-v7a-android-$EMULATOR_API
   licenses:
     - android-sdk-preview-license-52d11cd2
     - android-sdk-license-.+
     - google-gdk-license-.+
+
 before_cache:
   # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
   - "rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock"
   - "rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
+
 before_install:
   - "touch $HOME/.android/repositories.cfg"
   - "yes | sdkmanager \"platforms;android-28\""
   - "yes | sdkmanager \"build-tools;28.0.3\""
+
 before_script:
   - "chmod +x ./gradlew"
-  - pwd
-  - "ls -al"
+
 cache:
   directories:
     # Android SDK
@@ -53,7 +42,9 @@ cache:
 
     # Sonar cache
     - $HOME/.sonar/cache
+
 dist: trusty
+
 env:
   global:
     - ANDROID_ABI=armeabi-v7a
@@ -65,7 +56,9 @@ env:
 # Only clone the most recent commit.
 git:
   depth: 1
+
 jdk: oraclejdk8
+
 jobs:
   include:
     #    - name: "Clean build and test"
@@ -73,42 +66,33 @@ jobs:
     #      stage: build_and_test
     - name: "Instrumentation tests"
       before_install:
-        # Install SDK license so Android Gradle plugin can install deps.
-        - mkdir "$ANDROID_HOME/licenses" || true
-        - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
-        - echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
-
         # Install the rest of tools (e.g., avdmanager)
         - sdkmanager tools
 
         # Install the system image
         - yes | sdkmanager "system-images;android-$EMULATOR_API;default;armeabi-v7a"
-        - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
+        - avdmanager list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
 
         # Create and start emulator for the script. Meant to race the install task.
         - echo no | avdmanager create avd --force -n test -k "system-images;android-$EMULATOR_API;default;armeabi-v7a"
         - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+
       before_script:
         - android-wait-for-emulator
         - "adb shell input keyevent 82 &"
         - "adb shell setprop dalvik.vm.dexopt-flags v=n,o=v"
         - adb wait-for-device get-serialno
+
       script:
         - "./gradlew mergedJacocoReport -PdisablePreDex"
         - |
-          ./gradlew assembleAndroidTest -PdisablePreDex
+          ./gradlew assembleAndroidTest
           retval=$?
           if [ $retval -ne 0 ]; then
             echo "error on assembling, exit code: "$retval
             exit $retval
           fi
-        - |
-          ./gradlew :app:installDebug :app:installDebugAndroidTest -PdisablePreDex
-          retval=$?
-          if [ $retval -ne 0 ]; then
-            echo "error on install, exit code: "$retval
-            exit $retval
-          fi
+        - "./gradlew check connectedCheck -x lint --stacktrace"
         - sonar-scanner
       stage: ui_test
 
@@ -117,10 +101,13 @@ jobs:
     - name: Deploy
       script: "./gradlew task"
       stage: deploy
+
 language: android
+
 stages:
   #  - build_and_test
   - ui_test
   - if: "branch = master"
     name: deploy
-sudo: required
+
+sudo: false
