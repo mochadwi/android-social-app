@@ -38,9 +38,9 @@ android {
         create("released") {
             storeFile = file("$rootDir/placeholder.jks")
             // TODO: set $APP="yourpassword" on your machine terminal / environment
-            storePassword = System.getenv("PLACEHOLDER_PASS")
-            keyAlias = System.getenv("PLACEHOLDER_PASS")
-            keyPassword = System.getenv("PLACEHOLDER_PASS")
+            storePassword = System.getenv("KEYSTORE_PASS")
+            keyAlias = System.getenv("KEYSTORE_PASS")
+            keyPassword = System.getenv("KEYSTORE_PASS")
         }
     }
 
