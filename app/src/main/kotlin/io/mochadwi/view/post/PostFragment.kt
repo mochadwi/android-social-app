@@ -9,23 +9,20 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.mochadwi.R
 import io.mochadwi.databinding.PostFragmentBinding
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
+import io.mochadwi.domain.PostListState
 import io.mochadwi.util.base.BaseApiModel
 import io.mochadwi.util.base.BaseUserActionListener
 import io.mochadwi.util.ext.coroutineLaunch
 import io.mochadwi.util.ext.default
 import io.mochadwi.util.ext.fromJson
-import io.mochadwi.util.ext.putArgs
 import io.mochadwi.util.list.EndlessRecyclerOnScrollListener
 import io.mochadwi.view.HomeActivity
 import io.mochadwi.view.post.list.PostItem
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.serialization.serializer
@@ -45,14 +42,6 @@ class PostFragment : Fragment(), BaseUserActionListener {
     private lateinit var viewBinding: PostFragmentBinding
     private val viewModel by viewModel<PostViewModel>()
     private lateinit var onLoadMore: EndlessRecyclerOnScrollListener
-    private lateinit var broadcast: Channel<String>
-
-    companion object {
-        fun newInstance() = PostFragment()
-        fun newInstance(title: String) = PostFragment().putArgs {
-            putString("keywords", title)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +59,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
                     listener = this@PostFragment
                     vm = viewModel
                 }
+
         return viewBinding.root
     }
 
@@ -97,7 +87,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
         val searchItem = menu.findItem(R.id.actSearch)
 
         var searchFor = ""
-        val searchView = (searchItem?.actionView as SearchView).apply {
+        (searchItem?.actionView as SearchView).apply {
             // TODO: @mochadwi Definitely must using paging library, or upsert / delsert manually to the room
             setOnQueryTextListener(
                     object : SearchView.OnQueryTextListener {
@@ -135,7 +125,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
         }, 1000)
     }
 
-    private fun setupData() = with(viewBinding) {
+    private fun setupData() {
         viewModel.apply {
             getPosts()
         }
@@ -147,15 +137,12 @@ class PostFragment : Fragment(), BaseUserActionListener {
             state?.let {
                 when (state) {
                     is LoadingState -> showIsLoading()
-                    is PostViewModel.PostListState -> {
+                    is PostListState -> {
                         showCategoryItemList(
                                 isSearch = state.isSearch,
                                 posts = state.list.map { PostItem.from(it) })
                     }
                     is ErrorState -> showError(state.error)
-                    else -> {
-                        // TODO: @mochadwi nothing
-                    }
                 }
             }
         })
@@ -208,7 +195,7 @@ class PostFragment : Fragment(), BaseUserActionListener {
         }
     }
 
-    private fun showCategoryItemList(isSearch: Boolean = false, posts: List<PostItem>) = with(viewBinding) {
+    private fun showCategoryItemList(isSearch: Boolean = false, posts: List<PostItem>) {
         viewModel.apply {
             if (isSearch) postListSet.clear()
             postListSet.addAll(posts.toMutableList())
@@ -218,23 +205,6 @@ class PostFragment : Fragment(), BaseUserActionListener {
         }
     }
 
-    private fun setupEndlessScroll(isFirst: Boolean, isLocal: Boolean) = with(viewBinding) {
-        viewModel.apply {
-            if (isFirst && !isLocal) {
-                // TODO: @mochadwi implement this on ListBinding.kt instead? or using PagingLibrary?
-                list.rvSocialList.apply {
-                    onLoadMore = object : EndlessRecyclerOnScrollListener(layoutManager as GridLayoutManager) {
-                        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                            isRefreshing.set(true)
-                            getPosts()
-                        }
-                    }
-
-                    addOnScrollListener(onLoadMore)
-                }
-            }
-        }
-    }
     // TODO: Move this into utils class
     private inline fun <reified T : Any> converter(error: HttpException): BaseApiModel<T>? {
         var baseDao: BaseApiModel<T>? = null

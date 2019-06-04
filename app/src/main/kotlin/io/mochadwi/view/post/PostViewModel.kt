@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import io.mochadwi.data.repository.AppRepository
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
+import io.mochadwi.domain.PostListState
 import io.mochadwi.domain.State
-import io.mochadwi.domain.post.PostModel
 import io.mochadwi.util.base.BaseViewModel
 import io.mochadwi.util.ext.toSingleEvent
 import io.mochadwi.util.mvvm.LiveEvent
@@ -64,23 +64,6 @@ class PostViewModel(
                     _states.value = PostListState.from(query.isNotBlank(), posts!!)
                 } catch (error: Throwable) {
                     _states.value = ErrorState(error)
-                }
-            }
-        }
-    }
-
-    data class PostListState(
-            val isSearch: Boolean,
-            val list: List<PostModel>
-    ) : State() {
-        companion object {
-            fun from(isSearch: Boolean, list: List<PostModel>): PostListState {
-                return with(list) {
-                    when {
-                        // TODO: @mochadwi Move this into strings instead
-                        isEmpty() -> error("There's an empty post instead, please check your keyword")
-                        else -> PostListState(isSearch, this)
-                    }
                 }
             }
         }
