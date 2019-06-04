@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import io.mochadwi.databinding.PostdetailFragmentBinding
+import io.mochadwi.util.base.ToolbarListener
+import io.mochadwi.util.ext.default
 
 
 /**
@@ -37,5 +39,11 @@ class PostDetailFragment : Fragment() {
                     item = args.postItem
                 }
         return viewBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity() as ToolbarListener).updateTitleToolbar(args.postItem?.title.default)
     }
 }
