@@ -6,6 +6,7 @@ import io.mochadwi.data.repository.AppRepository
 import io.mochadwi.di.testOnlineSocialApp
 import io.mochadwi.domain.ErrorState
 import io.mochadwi.domain.LoadingState
+import io.mochadwi.domain.PostListState
 import io.mochadwi.domain.State
 import io.mochadwi.util.MockitoHelper.argumentCaptor
 import io.mochadwi.util.TestSchedulerProvider
@@ -79,7 +80,7 @@ class PostViewModelMockTest : KoinTest {
         // Test obtained values in order
         assertEquals(2, values.size)
         assertEquals(LoadingState, values[0])
-        assertEquals(PostViewModel.PostListState.from(false, mockPostsModel), values[1])
+        assertEquals(PostListState.from(mockPostsModel), values[1])
     }
 
     @Test
