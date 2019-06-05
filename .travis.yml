@@ -4,7 +4,10 @@ before_cache:
   - "rm -fr $HOME/.gradle/caches/*/plugin-resolution/"
 
 before_install:
+  # Fix repositories not found
   - "touch $HOME/.android/repositories.cfg"
+  - "yes | sdkmanager \"platforms;android-28\""
+  - "yes | sdkmanager \"build-tools;28.0.3\""
 
 before_script:
   - "chmod +x ./gradlew"
@@ -45,16 +48,13 @@ jdk: oraclejdk8
 jobs:
   include:
     # Only run development debug variant, to speed up build process
-    - name: "Unit test"
-      before_install:
-        - "yes | sdkmanager \"platforms;android-28\""
-        - "yes | sdkmanager \"build-tools;28.0.3\""
+    - name: "Unit test devevlopment debug variant"
 
       script: "./gradlew testDevelopmentDebug"
 
-      stage: test
+      stage: "Unit Test"
 
-    - name: "Instrumentation tests"
+    - name: "Instrumentation tests with emulator API 16"
       addons:
         sonarcloud:
           organization: "mochadwi-github"
@@ -95,19 +95,19 @@ jobs:
         - "./gradlew connectedDevelopmentDebugAndroidTest"
         # todo fix sonar-scanner sonar-project.properties to use gradle style instead
       #        - sonar-scanner
-      stage: ui_test
+      stage: "UI Test"
 
     # todo upload to fabric `crashlyticsUploadDistributionDevelopment` or playstore publishDevelopment
     # e.g: ./gradlew --no-daemon --parallel --stacktrace clean assembleDevelopmentDebug
-    - name: Deploy
+    - name: "Deploy to play store"
       script: "./gradlew clean"
       stage: deploy
 
 language: android
 
 stages:
-  - test
-  - ui_test
+  - "Unit Test"
+  - "UI Test"
   - if: "branch = master"
     name: deploy
 
