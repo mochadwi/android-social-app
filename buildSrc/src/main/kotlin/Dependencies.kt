@@ -18,7 +18,7 @@ object Versions {
 
     // Android
     const val applicationId = "io.mochadwi.social"
-    const val androidGradle = "3.6.0-alpha04"
+    const val androidGradle = "3.6.0-alpha05"
     const val androidBuildTools = "28.0.3"
     const val androidCompileSdk = 28
     const val androidMinSdk = 21
